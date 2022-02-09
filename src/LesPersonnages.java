@@ -36,7 +36,7 @@ public class LesPersonnages {
           
     public Personnage getPerso(int i){
         if (i>=0 && i<this.persos.size())
-             returnthis.persos.get(i);
+             return this.persos.get(i);
         else return null;
     }
     
@@ -54,7 +54,7 @@ public class LesPersonnages {
         boolean trouve = false;
         while(i<getTaille() && !trouve){
           if (getPerso(i).getNom().equals(p.getNom())){
-              this.persos.remove(i);  
+              this.persos.remove(getPerso(i));  
               trouve = true;
           }
           else i++;
@@ -66,7 +66,7 @@ public class LesPersonnages {
         for (int i=0; i<=n; i++)
         {
             lcr.ajoutePerso(getPerso(0));
-            this.persos.remove(0);  
+            this.persos.remove(getPerso(0));  
         }
         return lcr;
     } 
@@ -78,7 +78,7 @@ public class LesPersonnages {
         while(i<getTaille()){
             if (getPerso(i).getFamille().equals(f)) {
                 lcr.ajoutePerso(getPerso(i));
-                this.persos.remove(i);  
+                this.persos.remove(getPerso(i));  
             }
             else i++;
         }
@@ -96,6 +96,15 @@ public class LesPersonnages {
         for(int i=0; i<getTaille(); i++)
             s+=i+"- "+getPerso(i).toString();
        return s;
+    }
+    
+    public void ajoutePerso(Personnage p){
+        this.persos.add(p);
+    }
+    
+    public void ajoutePersos(LesPersonnages lp){
+        for(int i=0;i<lp.getTaille();i++)
+            this.persos.add(lp.getPerso(i));
     }
 	
     public LesPersonnages(int nc) {

@@ -26,6 +26,12 @@ public class Personnage {
         this.valeur = valeur;
         this.photo = new ImageIcon(getClass().getResource("/memory/img/"+nom+".png")).getImage();
     }
+    
+    public Personnage(String famille, String nom, int valeur){
+        this.famille = famille;
+        this.nom = nom;
+        this.valeur = valeur;
+    }
 
     public String getFamille() {
         return famille;
