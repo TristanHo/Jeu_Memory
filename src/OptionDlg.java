@@ -12,10 +12,21 @@ public class OptionDlg extends javax.swing.JDialog {
     /**
      * Creates new form OptionDlg
      */
+    private LesJoueurs lj;
+    private boolean ok;
+    private int nc;
+    
     public OptionDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        lj = new LesJoueurs();
+        ok = true;
+        nc = 0;
     }
+    
+    public LesJoueurs getJoueurs(){return this.lj;}
+    public boolean getOk(){return this.ok;}
+    public int getNiveau(){return this.nc;}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,10 +41,10 @@ public class OptionDlg extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        Niv1 = new javax.swing.JRadioButton();
+        Niv10 = new javax.swing.JRadioButton();
+        Niv18 = new javax.swing.JRadioButton();
+        Niv32 = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -45,10 +56,11 @@ public class OptionDlg extends javax.swing.JDialog {
         Edition = new javax.swing.JTextArea();
         BPhoto = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Annuler = new javax.swing.JButton();
+        Valider = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 3));
 
@@ -58,21 +70,41 @@ public class OptionDlg extends javax.swing.JDialog {
         jLabel1.setText("Choisissez la taille du jeu");
         jPanel3.add(jLabel1);
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("enfant (4 personnages, 2 familles)");
-        jPanel3.add(jRadioButton1);
+        buttonGroup1.add(Niv1);
+        Niv1.setText("enfant (4 personnages, 2 familles)");
+        Niv1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Niv1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Niv1);
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("débutant (10 personnages, 2 familles)");
-        jPanel3.add(jRadioButton2);
+        buttonGroup1.add(Niv10);
+        Niv10.setText("débutant (10 personnages, 2 familles)");
+        Niv10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Niv10ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Niv10);
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("avancé (18 personnages, 4 familles)");
-        jPanel3.add(jRadioButton3);
+        buttonGroup1.add(Niv18);
+        Niv18.setText("avancé (18 personnages, 4 familles)");
+        Niv18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Niv18ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Niv18);
 
-        buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setText("expert (32 personnages, 6 familles)");
-        jPanel3.add(jRadioButton4);
+        buttonGroup1.add(Niv32);
+        Niv32.setText("expert (32 personnages, 6 familles)");
+        Niv32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Niv32ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Niv32);
 
         jPanel1.add(jPanel3);
 
@@ -113,16 +145,43 @@ public class OptionDlg extends javax.swing.JDialog {
 
         jPanel2.setLayout(new java.awt.GridLayout(1, 2));
 
-        jButton1.setText("Annuler");
-        jPanel2.add(jButton1);
+        Annuler.setText("Annuler");
+        Annuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnnulerActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Annuler);
 
-        jButton2.setText("Valider");
-        jPanel2.add(jButton2);
+        Valider.setText("Valider");
+        jPanel2.add(Valider);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
+         this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_AnnulerActionPerformed
+
+    private void Niv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Niv1ActionPerformed
+       this.nc = 4;
+    }//GEN-LAST:event_Niv1ActionPerformed
+
+    private void Niv10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Niv10ActionPerformed
+       this.nc = 10;
+    }//GEN-LAST:event_Niv10ActionPerformed
+
+    private void Niv18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Niv18ActionPerformed
+        this.nc = 18;
+    }//GEN-LAST:event_Niv18ActionPerformed
+
+    private void Niv32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Niv32ActionPerformed
+       this.nc = 32;
+    }//GEN-LAST:event_Niv32ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,7 +211,7 @@ public class OptionDlg extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 OptionDlg dialog = new OptionDlg(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -167,11 +226,15 @@ public class OptionDlg extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Annuler;
     private javax.swing.JButton BPhoto;
     private javax.swing.JTextArea Edition;
+    private javax.swing.JRadioButton Niv1;
+    private javax.swing.JRadioButton Niv10;
+    private javax.swing.JRadioButton Niv18;
+    private javax.swing.JRadioButton Niv32;
+    private javax.swing.JButton Valider;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -183,10 +246,6 @@ public class OptionDlg extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
