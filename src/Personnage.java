@@ -18,13 +18,13 @@ public class Personnage {
         this.famille = "anonyme";
         this.nom = "anonyme";
         this.valeur = 0;
-        this.photo = new ImageIcon(getClass().getResource("/memory/img/anonyme.png")).getImage();
+        this.photo = new ImageIcon(getClass().getResource("/img/anonyme.png")).getImage();
     }
     public Personnage(String famille, String nom, int valeur){
         this.famille = famille;
         this.nom = nom;
         this.valeur = valeur;
-        this.photo = new ImageIcon(getClass().getResource("/memory/img/"+nom+".png")).getImage();
+        this.photo = new ImageIcon(getClass().getResource("/img/"+nom+".png")).getImage();
     }
 
     public String getFamille() {
@@ -60,7 +60,7 @@ public class Personnage {
     }
     
     public void setPhoto(String n){
-        this.photo = new ImageIcon(getClass().getResource("/memory/img/"+n+".jpg")).getImage();
+        this.photo = new ImageIcon(getClass().getResource("/img/"+n+".png")).getImage();
     }
     
     public String toString(){
