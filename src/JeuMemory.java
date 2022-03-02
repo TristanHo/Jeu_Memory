@@ -14,7 +14,7 @@ public class JeuMemory extends javax.swing.JFrame {
 
     private LesJoueurs joueurs ;
     private LesPersonnages persos ;
-   
+   //private int niveau;
 
     /*
      * Creates new form JeuMemory
@@ -74,7 +74,7 @@ public class JeuMemory extends javax.swing.JFrame {
         Recommencer = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        Options = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         Joueur = new javax.swing.JMenuItem();
         Carte = new javax.swing.JMenuItem();
@@ -150,13 +150,13 @@ public class JeuMemory extends javax.swing.JFrame {
 
         jMenu1.setText("Paramètres");
 
-        jMenuItem1.setText("Options");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        Options.setText("Options");
+        Options.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                OptionsActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(Options);
 
         jMenuBar1.add(jMenu1);
 
@@ -190,11 +190,16 @@ public class JeuMemory extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_RecommencerActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void OptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionsActionPerformed
         // TODO add your handling code here:
         OptionDlg od = new OptionDlg(this,true);
         od.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        if(od.getOk()==true){
+            this.joueurs = od.getJoueurs();
+            int niveau = od.getNiveau();
+            this.persos = new LesPersonnages(niveau);
+        }
+    }//GEN-LAST:event_OptionsActionPerformed
 
     private void CarteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarteActionPerformed
         // TODO add your handling code here:
@@ -252,6 +257,7 @@ public class JeuMemory extends javax.swing.JFrame {
     private javax.swing.JMenuItem Joueur;
     private javax.swing.JLabel NbPersosR;
     private javax.swing.JLabel NbPersosT;
+    private javax.swing.JMenuItem Options;
     private javax.swing.JPanel Panneau;
     private javax.swing.JButton Recommencer;
     private javax.swing.JButton jButton1;
@@ -277,7 +283,6 @@ public class JeuMemory extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

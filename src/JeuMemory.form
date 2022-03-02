@@ -9,12 +9,12 @@
             <Property name="text" type="java.lang.String" value="Param&#xe8;tres"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="Options">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Options"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OptionsActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
