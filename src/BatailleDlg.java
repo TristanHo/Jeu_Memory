@@ -13,7 +13,7 @@ public class BatailleDlg extends javax.swing.JDialog {
      * Creates new form BatailleDlg
      */
     public BatailleDlg(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent, modal);//cc
         initComponents();
         
     }
