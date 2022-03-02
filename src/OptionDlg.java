@@ -1,3 +1,7 @@
+
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
@@ -20,7 +24,7 @@ public class OptionDlg extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         lj = new LesJoueurs();
-        ok = true;
+        ok = false;
         nc = 0;
     }
     
@@ -47,10 +51,10 @@ public class OptionDlg extends javax.swing.JDialog {
         Niv32 = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        CaseLara = new javax.swing.JCheckBox();
+        CaseJack = new javax.swing.JCheckBox();
+        CaseJean = new javax.swing.JCheckBox();
+        CaseAmadeus = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Edition = new javax.swing.JTextArea();
@@ -114,17 +118,37 @@ public class OptionDlg extends javax.swing.JDialog {
         jLabel2.setText("Choisissez les joueurs créés par défaut");
         jPanel4.add(jLabel2);
 
-        jCheckBox1.setText("Lara");
-        jPanel4.add(jCheckBox1);
+        CaseLara.setText("Lara");
+        CaseLara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CaseLaraActionPerformed(evt);
+            }
+        });
+        jPanel4.add(CaseLara);
 
-        jCheckBox2.setText("Jack");
-        jPanel4.add(jCheckBox2);
+        CaseJack.setText("Jack");
+        CaseJack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CaseJackActionPerformed(evt);
+            }
+        });
+        jPanel4.add(CaseJack);
 
-        jCheckBox3.setText("Jean-Sébastien");
-        jPanel4.add(jCheckBox3);
+        CaseJean.setText("Jean-Sébastien");
+        CaseJean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CaseJeanActionPerformed(evt);
+            }
+        });
+        jPanel4.add(CaseJean);
 
-        jCheckBox4.setText("Amadeus");
-        jPanel4.add(jCheckBox4);
+        CaseAmadeus.setText("Amadeus");
+        CaseAmadeus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CaseAmadeusActionPerformed(evt);
+            }
+        });
+        jPanel4.add(CaseAmadeus);
 
         jPanel1.add(jPanel4);
 
@@ -154,6 +178,11 @@ public class OptionDlg extends javax.swing.JDialog {
         jPanel2.add(Annuler);
 
         Valider.setText("Valider");
+        Valider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ValiderActionPerformed(evt);
+            }
+        });
         jPanel2.add(Valider);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
@@ -163,7 +192,7 @@ public class OptionDlg extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
-         this.setVisible(false);
+        this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_AnnulerActionPerformed
 
@@ -182,6 +211,49 @@ public class OptionDlg extends javax.swing.JDialog {
     private void Niv32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Niv32ActionPerformed
        this.nc = 32;
     }//GEN-LAST:event_Niv32ActionPerformed
+
+    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
+        // TODO add your handling code here:
+        this.ok = true;
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_ValiderActionPerformed
+
+    private void CaseLaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseLaraActionPerformed
+        // TODO add your handling code here:
+        Joueur j=new Joueur("Lara", "epiques");
+        j.setPhoto(new ImageIcon(getClass().getResource("/img/lara.jpg")));
+        Edition.setText(j.toString());
+        Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
+        BPhoto.setIcon(new ImageIcon(img));
+    }//GEN-LAST:event_CaseLaraActionPerformed
+
+    private void CaseJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseJackActionPerformed
+        // TODO add your handling code here:
+        Joueur j=new Joueur("Jack", "rares");
+        j.setPhoto(new ImageIcon(getClass().getResource("/img/jack.png")));
+        Edition.setText(j.toString());
+        Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
+        BPhoto.setIcon(new ImageIcon(img));
+    }//GEN-LAST:event_CaseJackActionPerformed
+
+    private void CaseJeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseJeanActionPerformed
+        // TODO add your handling code here:
+        Joueur j=new Joueur("Jean-Sébastien", "alpins-femmes");
+        j.setPhoto(new ImageIcon(getClass().getResource("/img/bach.jpg")));
+        Edition.setText(j.toString());
+        Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
+        BPhoto.setIcon(new ImageIcon(img));
+    }//GEN-LAST:event_CaseJeanActionPerformed
+
+    private void CaseAmadeusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseAmadeusActionPerformed
+        // TODO add your handling code here:
+        Joueur j=new Joueur("Mozart", "communs");
+        j.setPhoto(new ImageIcon(getClass().getResource("/img/mozart.jpg")));
+        Edition.setText(j.toString());
+        Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
+        BPhoto.setIcon(new ImageIcon(img));
+    }//GEN-LAST:event_CaseAmadeusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,6 +300,10 @@ public class OptionDlg extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annuler;
     private javax.swing.JButton BPhoto;
+    private javax.swing.JCheckBox CaseAmadeus;
+    private javax.swing.JCheckBox CaseJack;
+    private javax.swing.JCheckBox CaseJean;
+    private javax.swing.JCheckBox CaseLara;
     private javax.swing.JTextArea Edition;
     private javax.swing.JRadioButton Niv1;
     private javax.swing.JRadioButton Niv10;
@@ -235,10 +311,6 @@ public class OptionDlg extends javax.swing.JDialog {
     private javax.swing.JRadioButton Niv32;
     private javax.swing.JButton Valider;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
