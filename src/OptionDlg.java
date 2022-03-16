@@ -17,6 +17,7 @@ public class OptionDlg extends javax.swing.JDialog {
      * Creates new form OptionDlg
      */
     private LesJoueurs lj;
+    private LesJoueurs JoueursDef;//liste des joueurs par défaut
     private boolean ok;
     private int nc;
     
@@ -26,11 +27,28 @@ public class OptionDlg extends javax.swing.JDialog {
         lj = new LesJoueurs();
         ok = false;
         nc = 0;
+        InitJoueurs();
     }
     
     public LesJoueurs getJoueurs(){return this.lj;}
     public boolean getOk(){return this.ok;}
     public int getNiveau(){return this.nc;}
+    
+    public void InitJoueurs(){
+        Joueur j=new Joueur("Lara", "epiques");
+        j.setPhoto(new ImageIcon(getClass().getResource("/img/lara.jpg")));
+        JoueursDef.ajouteJoueur(j);
+        j=new Joueur("Jack", "rares");
+        j.setPhoto(new ImageIcon(getClass().getResource("/img/jack.png")));
+        JoueursDef.ajouteJoueur(j);
+        j=new Joueur("Jean-Sébastien", "alpins-femmes");
+        j.setPhoto(new ImageIcon(getClass().getResource("/img/bach.jpg")));
+        JoueursDef.ajouteJoueur(j);
+        j=new Joueur("Mozart", "communs");
+        j.setPhoto(new ImageIcon(getClass().getResource("/img/mozart.jpg")));
+        JoueursDef.ajouteJoueur(j);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -214,6 +232,14 @@ public class OptionDlg extends javax.swing.JDialog {
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
         // TODO add your handling code here:
+        if(CaseLara.isSelected())
+            lj.ajouteJoueur(JoueursDef.getJoueur(0));
+        if(CaseJack.isSelected())
+            lj.ajouteJoueur(JoueursDef.getJoueur(1));
+        if(CaseJean.isSelected())
+            lj.ajouteJoueur(JoueursDef.getJoueur(2));
+        if(CaseAmadeus.isSelected())
+            lj.ajouteJoueur(JoueursDef.getJoueur(3));
         this.ok = true;
         this.setVisible(false);
         this.dispose();
@@ -221,8 +247,7 @@ public class OptionDlg extends javax.swing.JDialog {
 
     private void CaseLaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseLaraActionPerformed
         // TODO add your handling code here:
-        Joueur j=new Joueur("Lara", "epiques");
-        j.setPhoto(new ImageIcon(getClass().getResource("/img/lara.jpg")));
+        Joueur j=JoueursDef.getJoueur(0);
         Edition.setText(j.toString());
         Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
         BPhoto.setIcon(new ImageIcon(img));
@@ -230,8 +255,7 @@ public class OptionDlg extends javax.swing.JDialog {
 
     private void CaseJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseJackActionPerformed
         // TODO add your handling code here:
-        Joueur j=new Joueur("Jack", "rares");
-        j.setPhoto(new ImageIcon(getClass().getResource("/img/jack.png")));
+        Joueur j=JoueursDef.getJoueur(1);
         Edition.setText(j.toString());
         Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
         BPhoto.setIcon(new ImageIcon(img));
@@ -239,8 +263,7 @@ public class OptionDlg extends javax.swing.JDialog {
 
     private void CaseJeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseJeanActionPerformed
         // TODO add your handling code here:
-        Joueur j=new Joueur("Jean-Sébastien", "alpins-femmes");
-        j.setPhoto(new ImageIcon(getClass().getResource("/img/bach.jpg")));
+        Joueur j=JoueursDef.getJoueur(2);
         Edition.setText(j.toString());
         Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
         BPhoto.setIcon(new ImageIcon(img));
@@ -248,8 +271,7 @@ public class OptionDlg extends javax.swing.JDialog {
 
     private void CaseAmadeusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseAmadeusActionPerformed
         // TODO add your handling code here:
-        Joueur j=new Joueur("Mozart", "communs");
-        j.setPhoto(new ImageIcon(getClass().getResource("/img/mozart.jpg")));
+        Joueur j=JoueursDef.getJoueur(3);
         Edition.setText(j.toString());
         Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
         BPhoto.setIcon(new ImageIcon(img));
