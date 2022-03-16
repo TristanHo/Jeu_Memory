@@ -19,7 +19,7 @@ public class JeuMemory extends javax.swing.JFrame {
     /*
      * Creates new form JeuMemory
      */
-    public JeuMemory() {
+    public JeuMemory(){
         initComponents();
         this.persos = new LesPersonnages();
         this.joueurs = new LesJoueurs();
@@ -170,7 +170,7 @@ public class JeuMemory extends javax.swing.JFrame {
         });
         jMenu2.add(Joueur);
 
-        Carte.setText("Carte");
+        Carte.setText("Cartes");
         Carte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CarteActionPerformed(evt);
@@ -203,8 +203,10 @@ public class JeuMemory extends javax.swing.JFrame {
 
     private void CarteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarteActionPerformed
         // TODO add your handling code here:
-        BatailleDlg bdl = new BatailleDlg(this,true);
-        bdl.setVisible(true);
+        Joueur j=new Joueur("FanMemory", "commun");
+        j.initPaquetTest();
+        VisuPersonnagesDlg vpd = new VisuPersonnagesDlg(this,true,j);
+        vpd.setVisible(true);
     }//GEN-LAST:event_CarteActionPerformed
 
     private void JoueurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JoueurActionPerformed

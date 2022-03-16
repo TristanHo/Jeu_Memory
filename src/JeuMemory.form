@@ -34,7 +34,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Carte">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Carte"/>
+                <Property name="text" type="java.lang.String" value="Cartes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CarteActionPerformed"/>

@@ -65,4 +65,14 @@ public class Joueur {
     public int getScore(){
        return this.paquet.getScore();
     }
+    
+    public void ajoutePersoPaquet(Personnage p){
+        this.paquet.ajoutePerso(p);
+    }
+    public void initPaquetTest(){
+        ajoutePersoPaquet(new Personnage("communs", "assault-trooper", 10));
+        ajoutePersoPaquet(new Personnage("communs", "commando", 20));
+        ajoutePersoPaquet(new Personnage("rares", "absolute-zero", 10));
+    }
+
 }
