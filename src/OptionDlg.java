@@ -25,6 +25,7 @@ public class OptionDlg extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         lj = new LesJoueurs();
+        JoueursDef = new LesJoueurs();
         ok = false;
         nc = 0;
         InitJoueurs();

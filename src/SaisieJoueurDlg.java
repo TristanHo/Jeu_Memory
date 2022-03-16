@@ -82,7 +82,7 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         Photo = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         Annuler = new javax.swing.JButton();
-        Variable = new javax.swing.JButton();
+        Valider = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -147,13 +147,13 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         });
         jPanel7.add(Annuler);
 
-        Variable.setText("Variable");
-        Variable.addActionListener(new java.awt.event.ActionListener() {
+        Valider.setText("Valider");
+        Valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VariableActionPerformed(evt);
+                ValiderActionPerformed(evt);
             }
         });
-        jPanel7.add(Variable);
+        jPanel7.add(Valider);
 
         jPanel3.add(jPanel7, java.awt.BorderLayout.SOUTH);
 
@@ -181,7 +181,7 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
      } 
     }//GEN-LAST:event_ParcourirActionPerformed
 
-    private void VariableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VariableActionPerformed
+    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
        if(this.Pseudo.getText()!= "")
        {
            if(this.ListeFamilles.getSelectedIndex()!=0)
@@ -202,7 +202,7 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
        {
            this.Pseudo.setText("Vous n'avez pas saisi de pseudo !!!");
        }
-    }//GEN-LAST:event_VariableActionPerformed
+    }//GEN-LAST:event_ValiderActionPerformed
 
     private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
         this.ok=false;
@@ -217,7 +217,7 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
     private javax.swing.JButton Parcourir;
     private javax.swing.JButton Photo;
     private javax.swing.JTextArea Pseudo;
-    private javax.swing.JButton Variable;
+    private javax.swing.JButton Valider;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

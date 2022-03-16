@@ -20,7 +20,8 @@ public class VisuJoueursDlg extends javax.swing.JDialog {
     /**
      * Creates new form VisuJoueursDlg
      */
-    LesJoueurs lj; 
+    private LesJoueurs lj; 
+    
     public VisuJoueursDlg(java.awt.Frame parent, boolean modal, LesJoueurs lj) {
         super(parent, modal);
         initComponents();
@@ -31,7 +32,7 @@ public class VisuJoueursDlg extends javax.swing.JDialog {
     
     private void initTrombi(){
         int nb = this.lj.getNbJoueurs();
-        Panneau.setLayout(new GridLayout(1, nb));
+        Panneau.setLayout(new GridLayout(nb-1, nb-1));
         for (int i=0; i< nb; i++)
         {
             JButton jb= new JButton();
@@ -50,7 +51,7 @@ public class VisuJoueursDlg extends javax.swing.JDialog {
 
     private void AfficheInfosJoueur(java.awt.event.ActionEvent evt) {
         JButton jb = (JButton) evt.getSource();
-        Edition.setText(lj.getJoueur(Integer. parseInt(jb.getName())).toString());
+        Edition.setText(lj.getJoueur(Integer.parseInt(jb.getName())).toString());
         
     }
 
@@ -121,10 +122,10 @@ public class VisuJoueursDlg extends javax.swing.JDialog {
         JButton jb;
         for(int i =0;i<Panneau.getComponents().length;i++)
         {
-            jb= (JButton)Panneau.getComponent(i);
+           jb= (JButton)Panneau.getComponent(i);
            Image image = this.lj.getJoueur(i).getPhoto().getImage();
            Image adaptee = image.getScaledInstance(jb.getWidth(), jb.getHeight(), Image.SCALE_SMOOTH);
-            jb.setIcon(new ImageIcon(adaptee));
+           jb.setIcon(new ImageIcon(adaptee));
         }
     }//GEN-LAST:event_AfficherActionPerformed
 

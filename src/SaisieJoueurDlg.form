@@ -194,12 +194,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnnulerActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="Variable">
+            <Component class="javax.swing.JButton" name="Valider">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Variable"/>
+                <Property name="text" type="java.lang.String" value="Valider"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VariableActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ValiderActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
