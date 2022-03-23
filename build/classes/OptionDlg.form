@@ -114,25 +114,37 @@
                 <Property name="text" type="java.lang.String" value="Choisissez les joueurs cr&#xe9;&#xe9;s par d&#xe9;faut"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+            <Component class="javax.swing.JCheckBox" name="CaseLara">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lara"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CaseLaraActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+            <Component class="javax.swing.JCheckBox" name="CaseJack">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Jack"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CaseJackActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+            <Component class="javax.swing.JCheckBox" name="CaseJean">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Jean-S&#xe9;bastien"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CaseJeanActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox4">
+            <Component class="javax.swing.JCheckBox" name="CaseAmadeus">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Amadeus"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CaseAmadeusActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -193,6 +205,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Valider"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ValiderActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
