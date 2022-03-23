@@ -21,9 +21,9 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
 
     
      private Joueur j;
-     boolean ok;
-     ImageIcon photo;
-     LesPersonnages lp;
+     private boolean ok;
+     private ImageIcon photo;
+     private LesPersonnages lp;
      
      public Joueur getJoueur()
      {
@@ -36,21 +36,36 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
      
     /**
      * Creates new form SaisieJoueurDlg
+     * @param parent
+     * @param modal
+     * @param lp
      */
     public SaisieJoueurDlg(java.awt.Frame parent, boolean modal ,LesPersonnages lp) {
         super(parent, modal);
         initComponents();
         this.ok=false;
         this.lp=lp;
+        j = new Joueur();
         initListeFamilles();
+        this.ListeFamilles.setSelectedIndex(0);
         
     }
     
     private void initListeFamilles(){
         DefaultListModel dlm = new DefaultListModel();
+        
         for(int i = 0; i<lp.getTaille();i++)
         {
-            dlm.addElement(lp.getPerso(i).getFamille());
+            String famille = lp.getPerso(i).getFamille();
+            boolean contient = false;
+            for(int j=0;j<dlm.size();j++)
+            {
+                if(dlm.get(j).equals(famille))
+                    contient=true;
+            }
+            
+            if(contient==false)
+            dlm.addElement(famille);
         }
         this.ListeFamilles.setModel(dlm);
     }
@@ -85,6 +100,7 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         Valider = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jLabel1.setText("Créez votre joueur");
         jPanel1.add(jLabel1);
@@ -160,6 +176,7 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParcourirActionPerformed
@@ -182,20 +199,25 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_ParcourirActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-       if(this.Pseudo.getText()!= "")
+       if(!"".equals(this.Pseudo.getText()))
        {
-           if(this.ListeFamilles.getSelectedIndex()!=0)
+           if(this.ListeFamilles.getSelectedIndex()!=-1)
            {
                
            
                 this.j = new Joueur(this.Pseudo.getText(),this.ListeFamilles.getSelectedValue());
                 if(this.photo!=null)
                 {
-                    this.Photo.setIcon(photo);
+                    j.setPhoto(photo);
                     this.setVisible(false);
                     this.dispose();
                     this.ok=true;
                 }
+           }
+           else
+           {
+               j.setFamillePref(this.ListeFamilles.getModel().getElementAt(0));
+               
            }
        } 
        else

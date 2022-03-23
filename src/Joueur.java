@@ -55,6 +55,13 @@ public class Joueur {
         this.paquet = new LesPersonnages();
     }
     
+    public Joueur(){
+        this.pseudo = "anonyme";
+        this.famillePref = "anonyme";
+        this.paquet = new LesPersonnages();
+        this.photo = new ImageIcon(getClass().getResource("/img/anonyme.png"));
+    }
+    
     public String toString(){
         return "Pseudo :"+getPseudo()+
                 "\nFamille préférée : "+getFamillePref()+

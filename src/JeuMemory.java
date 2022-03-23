@@ -76,6 +76,7 @@ public class JeuMemory extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Options = new javax.swing.JMenuItem();
+        AjoutJoueur = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         Joueur = new javax.swing.JMenuItem();
         Carte = new javax.swing.JMenuItem();
@@ -159,6 +160,14 @@ public class JeuMemory extends javax.swing.JFrame {
         });
         jMenu1.add(Options);
 
+        AjoutJoueur.setText("Ajout Joueur");
+        AjoutJoueur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AjoutJoueurActionPerformed(evt);
+            }
+        });
+        jMenu1.add(AjoutJoueur);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Visualiser");
@@ -216,6 +225,15 @@ public class JeuMemory extends javax.swing.JFrame {
        visu.setVisible(true);
     }//GEN-LAST:event_JoueurActionPerformed
 
+    private void AjoutJoueurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjoutJoueurActionPerformed
+        SaisieJoueurDlg sjd = new SaisieJoueurDlg(this,true,this.persos);
+        sjd.setVisible(true);
+        if(sjd.getOk())
+        {
+            this.joueurs.ajouteJoueur(sjd.getJoueur());
+        }
+    }//GEN-LAST:event_AjoutJoueurActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -252,6 +270,7 @@ public class JeuMemory extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AjoutJoueur;
     private javax.swing.JMenuItem Carte;
     private javax.swing.JButton Demarrer;
     private javax.swing.JTextArea Edition;

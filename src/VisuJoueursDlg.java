@@ -32,6 +32,10 @@ public class VisuJoueursDlg extends javax.swing.JDialog {
     
     private void initTrombi(){
         int nb = this.lj.getNbJoueurs();
+        if(nb<=1){
+            Panneau.setLayout(new GridLayout(1,1));
+        }
+        else   
         Panneau.setLayout(new GridLayout(nb-1, nb-1));
         for (int i=0; i< nb; i++)
         {
