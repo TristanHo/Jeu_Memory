@@ -34,6 +34,12 @@ public class LesJoueurs {
         this.lstJ.add(j);
     }
     
+    public void ajouteJoueurs(LesJoueurs j){
+        for(int i=0;i<j.getNbJoueurs();i++){
+            this.ajouteJoueur(j.getJoueur(i));
+        }
+    }
+    
     public Joueur rechJoueur(String p){
         Joueur j = null;
         for(int i=0;i<getNbJoueurs();i++){

@@ -27,7 +27,8 @@ public class OptionDlg extends javax.swing.JDialog {
         lj = new LesJoueurs();
         JoueursDef = new LesJoueurs();
         ok = false;
-        nc = 0;
+        Niv1.setSelected(true);
+        nc = 4;
         InitJoueurs();
     }
     

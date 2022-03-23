@@ -23,12 +23,13 @@ public class JeuMemory extends javax.swing.JFrame {
         initComponents();
         this.persos = new LesPersonnages();
         this.joueurs = new LesJoueurs();
-        Joueur j=new Joueur("Lara", "epiques");
+        //joueurs test
+        /*Joueur j=new Joueur("Lara", "epiques");
         j.setPhoto(new ImageIcon(getClass().getResource("/img/lara.jpg")));
         this.joueurs.ajouteJoueur(j);
         j=new Joueur("Jack", "rares");
         j.setPhoto(new ImageIcon(getClass().getResource("/img/jack.png")));
-        this.joueurs.ajouteJoueur(j);
+        this.joueurs.ajouteJoueur(j);*/
 
     }
 
@@ -195,7 +196,7 @@ public class JeuMemory extends javax.swing.JFrame {
         OptionDlg od = new OptionDlg(this,true);
         od.setVisible(true);
         if(od.getOk()==true){
-            this.joueurs = od.getJoueurs();
+            this.joueurs.ajouteJoueurs(od.getJoueurs());
             int niveau = od.getNiveau();
             this.persos = new LesPersonnages(niveau);
         }
