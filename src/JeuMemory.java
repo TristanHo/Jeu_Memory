@@ -378,8 +378,8 @@ public class JeuMemory extends javax.swing.JFrame {
         PlateauJeu p = this.monJeu.getMonP(); //On récupére le plateau, ce qui va rendre le code plus lisible
         Joueur j = this.joueurs.getJoueur(monJeu.getIndice()); //on récupére le joueur courant
         
-        JButton bt1 = //le premier bouton cliqué
-        JButton bt2 = //le deuxième bouton cliqué
+        JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l1-1)+c1);//le premier bouton cliqué
+        JButton bt2 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l2-1)+c2);//le deuxième bouton cliqué
                 
         if(p.getCase(l1, c1) == p.getCase(l2, c2))//Si les personnages des deux cartes sont identiques (c’est-à-dire que les valeurs contenues dans les cases du plateau sont identiques)
         {
@@ -428,7 +428,7 @@ public class JeuMemory extends javax.swing.JFrame {
             
                 bonus=-1;//Réinitialisation de la valeur du bonus à -1.
 
-                j = monJeu.getJoueurSuivant();//Le joueur courant change et est fixé au joueur suivant
+                j = joueurs.getJoueur(monJeu.getIndSuivant(monJeu.getIndC()));//Le joueur courant change et est fixé au joueur suivant
             
             }
             
@@ -445,7 +445,7 @@ public class JeuMemory extends javax.swing.JFrame {
             //suivant en donnant son pseudo.
             else
             {
-                Edition.append("\nC'est le tour de "+);//Joueur Suivant pseudo
+                Edition.append("\nC'est le tour de "+joueurs.getJoueur(this.monJeu.getIndSuivant(monJeu.getIndC())));//Joueur Suivant pseudo
             }
             
             //Le nombre de personnages trouvés et restants est mis à jour.
@@ -459,6 +459,9 @@ public class JeuMemory extends javax.swing.JFrame {
         else
         {
             //Retourner les cartes car elles ne sont pas identiques
+            bt1.setIcon(null);
+            bt2.setIcon(null);
+            
         }
         //réinitialisation des valeurs des positions des cartes (l1,c1, l2, c2) à -1.
         this.l1=-1;
