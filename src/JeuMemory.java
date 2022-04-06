@@ -118,6 +118,8 @@ public class JeuMemory extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         Joueurs = new javax.swing.JMenuItem();
         Cartes = new javax.swing.JMenuItem();
+        Test = new javax.swing.JMenu();
+        Transfert_Test = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 700));
@@ -233,6 +235,18 @@ public class JeuMemory extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        Test.setText("Test");
+
+        Transfert_Test.setText("Transfert_Test");
+        Transfert_Test.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Transfert_TestActionPerformed(evt);
+            }
+        });
+        Test.add(Transfert_Test);
+
+        jMenuBar1.add(Test);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -309,6 +323,19 @@ public class JeuMemory extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_DemarrerActionPerformed
+
+    private void Transfert_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Transfert_TestActionPerformed
+        Joueur j1=new Joueur("FanMemory0", "commun");
+        j1.initPaquetTest();
+        Joueur j2=new Joueur("FanMemory1", "commun");
+        j2.getPaquet().ajoutePerso(new Personnage("epiques", "burnout", 20));
+        j2.getPaquet().ajoutePerso(new Personnage("epiques", "funk-ops", 30));
+        j2.getPaquet().ajoutePerso(new Personnage("alpins-femmes", "mogul-master", 10));
+        this.joueurs.ajouteJoueur(j1);
+        this.joueurs.ajouteJoueur(j2);
+        TransfertDlg diag = new TransfertDlg(this,true,joueurs,0 );
+        diag.setVisible(true);
+    }//GEN-LAST:event_Transfert_TestActionPerformed
 
     public void boutonActionPerformed(ActionEvent evt){
         
@@ -491,6 +518,8 @@ public class JeuMemory extends javax.swing.JFrame {
     private javax.swing.JMenuItem Options;
     private javax.swing.JPanel Panneau;
     private javax.swing.JButton Recommencer;
+    private javax.swing.JMenu Test;
+    private javax.swing.JMenuItem Transfert_Test;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
