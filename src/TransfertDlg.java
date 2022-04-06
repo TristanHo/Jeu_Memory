@@ -32,11 +32,12 @@ public class TransfertDlg extends javax.swing.JDialog {
         this.ok=false; //booléen pour savoir si il y a eu un transfert de cartes
         this.fs=null;
         initCombo(); // méthode pour remplir la liste déroulante
-        indjs = 0;
+        this.indjs = 0; //indice du joueur sélectionné dans la JComboBox
         Message1.setText("Le joueur "+lj.getJoueur(indj).getPseudo()+" a obtenu une famille complète");
         Infos.setText("Personnages de "+lj.getJoueur(indj).getPseudo()+" : \n"+lj.getJoueur(indj).getPaquet());
     }
     
+    //Accesseurs du booléen 
     public boolean getOk(){
         return this.ok;
     }
@@ -59,46 +60,51 @@ public class TransfertDlg extends javax.swing.JDialog {
     }
     
     public void initPanneau(){
-        PanneauG.removeAll();
-        this.repaint();
-        LesPersonnages lcs = this.lj.getJoueur(indj).getPaquet();
-        int t = lcs.getTaille();
-        int n = 1+(t-1)/4;
-        PanneauG.setLayout(new java.awt.GridLayout(4,n));
+        PanneauG.removeAll(); //on retire tous les éléments du panneau
+        this.repaint(); //on le réaffiche
+        LesPersonnages lcs = this.lj.getJoueur(indj).getPaquet(); //stockage du paquet du joueur sélectionné dans une variable
+        int t = lcs.getTaille(); //nombre de personnages dans le paquet
+        int n = 1+(t-1)/4; //nombre de colonnes pour les boutons à afficher
+        PanneauG.setLayout(new java.awt.GridLayout(4,n)); //on applique le Layout correspondant au panneau
         for(int i = 0; i < t; i++){
-            JButton b = new JButton();
-            b.setName(lcs.getPerso(i).getFamille());
+            JButton b = new JButton(); //création d'un bouton
+            b.setName(lcs.getPerso(i).getFamille()); //on affecte comme nom au bouton la famille du personnage
+            //Abonnement du bouton à un écouteur d'événement
             b.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt){
                     boutonActionPerformed(evt);
                 }
             });
-            PanneauG.add(b);
+            PanneauG.add(b); //ajout du bouton au panneau
         }
         this.pack();
     }
     
     private void boutonActionPerformed(ActionEvent evt){
-        LesPersonnages lp = lj.getJoueur(indjs).getPaquet(); 
-        int t = lp.getTaille();
-        JButton bt=(JButton) evt.getSource();
-        fs = bt.getName(); // la proprité Name, contient ici le nom du personnage affiché sur le bouton
+        LesPersonnages lp = lj.getJoueur(indjs).getPaquet(); //récupération du paquet du joueur sélectionné
+        int t = lp.getTaille(); //nombre de personnages du paquet
+        JButton bt=(JButton) evt.getSource(); //récupération du bouton où l'événement a eu lieu
+        fs = bt.getName(); // la propriété Name, contient ici le nom du personnage affiché sur le bouton
         for(int i = 0; i < t; i++) {
-            JButton b = (JButton)(PanneauG.getComponent(i));
-            if (b.getName().equals(fs))
+            JButton b = (JButton)(PanneauG.getComponent(i)); //récupération du ième bouton du panneau
+            //si le nom du bouton correspond à la famille c'est-à-dire au nom du bouton sélectionné
+            //cela signifie que les deux boutons correspondent à des personnages de la même famille
+            //On affiche donc une bordure rouge sur ce bouton
+            if (b.getName().equals(fs)) 
                 b.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(255, 0, 0)));
+            //sinon on ne fait rien
             else
                 b.setBorder(null);
             }
-        LesPersonnages lps = lp.getPersosFamille(fs);
-        Infos.setText("Vous pouvez récupérer "+lps.getTaille()+" personnages : \n"+lps);
+        LesPersonnages lps = lp.getPersosFamille(fs); //récupération des personnages du paquet correspondant à la même famille
+        Infos.setText("Vous pouvez récupérer "+lps.getTaille()+" personnages : \n"+lps); //affichage du nombre de personnages de la même famille récupérables
     }
    
     private void affichePanneau(){
-        LesPersonnages lcs = this.lj.getJoueur(indj).getPaquet();
-        for(int i =0; i<lcs.getTaille();i++){
-            JButton b = (JButton)PanneauG.getComponent(i);
-            lcs.getPerso(i).setImgBouton(b);
+        LesPersonnages lcs = this.lj.getJoueur(indjs).getPaquet(); //récupération du paquet du joueur sélectionné
+        for(int i =0; i<lcs.getTaille();i++){ 
+            JButton b = (JButton)PanneauG.getComponent(i); //récupération du ième bouton du panneau
+            lcs.getPerso(i).setImgBouton(b); //on lui applique la photo du personnage correspondant
         }
     }
 
@@ -189,19 +195,20 @@ public class TransfertDlg extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboJoueursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboJoueursActionPerformed
-        this.indjs = ComboJoueurs.getSelectedIndex();
-        if (indjs != -1){
-            if(this.indjs == this.indj){
-                Infos.setText("Sélectionnez un joueur différent du joueur courant !");
-                PanneauG.removeAll();
-                PanneauG.repaint();
+        this.indjs = ComboJoueurs.getSelectedIndex(); //récupération de l'indice de l'élément sélectionné dans la JComboBox
+        if (indjs != -1){ //on vérifie qu'un élément est bien sélectionné
+            if(this.indjs == this.indj){ //si l'indice est le même que celui du joueur courant
+                Infos.setText("Sélectionnez un joueur différent du joueur courant !"); //on indique qu'il faut sélectionner un autre joueur
+                PanneauG.removeAll(); //on enlève tous les composants du panneau
+                PanneauG.repaint(); //on réaffiche le panneau
+            }
+            else { //si c'est un autre joueur que le joueur courant qui est sélectionné
+                Infos.setText("\nJoueur sélectionné: "+lj.getJoueur(indjs).toString()); //On affiche les informations du joueur
+                //Appel de ces deux méthodes pour remplir le tableau de gauche avec les personnages du joueur sélectionné
+                initPanneau();
+                affichePanneau();
+            }
         }
-        else {
-            Infos.setText("\nJoueur sélectionné: "+lj.getJoueur(indjs).toString());
-            initPanneau();
-            affichePanneau();
-        }
- }
     }//GEN-LAST:event_ComboJoueursActionPerformed
 
     private void FermerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FermerActionPerformed
