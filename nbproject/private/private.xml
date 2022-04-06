@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/un_kn/Desktop/Jeu_Memory/src/Action.java</file>
+            <file>file:/C:/Users/un_kn/Desktop/Jeu_Memory/src/Joueur.java</file>
             <file>file:/C:/Users/un_kn/Desktop/Jeu_Memory/src/BatailleDlg.java</file>
             <file>file:/C:/Users/un_kn/Desktop/Jeu_Memory/src/JeuMemory.java</file>
-            <file>file:/C:/Users/un_kn/Desktop/Jeu_Memory/src/VisuPersonnagesDlg.java</file>
-            <file>file:/C:/Users/un_kn/Desktop/Jeu_Memory/src/TransfertDlg.java</file>
+            <file>file:/C:/Users/un_kn/Desktop/Jeu_Memory/src/Bataille.java</file>
+            <file>file:/C:/Users/un_kn/Desktop/Jeu_Memory/src/SaisieJoueurDlg.java</file>
         </group>
     </open-files>
 </project-private>

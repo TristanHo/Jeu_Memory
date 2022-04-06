@@ -120,6 +120,7 @@ public class JeuMemory extends javax.swing.JFrame {
         Cartes = new javax.swing.JMenuItem();
         Test = new javax.swing.JMenu();
         Transfert_Test = new javax.swing.JMenuItem();
+        Bataille_Test = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 700));
@@ -245,6 +246,14 @@ public class JeuMemory extends javax.swing.JFrame {
         });
         Test.add(Transfert_Test);
 
+        Bataille_Test.setText("Bataille_Test");
+        Bataille_Test.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bataille_TestActionPerformed(evt);
+            }
+        });
+        Test.add(Bataille_Test);
+
         jMenuBar1.add(Test);
 
         setJMenuBar(jMenuBar1);
@@ -337,6 +346,17 @@ public class JeuMemory extends javax.swing.JFrame {
         diag.setVisible(true);
     }//GEN-LAST:event_Transfert_TestActionPerformed
 
+    private void Bataille_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bataille_TestActionPerformed
+        // ajout de cartes aux 2 premiers joueurs
+        this.joueurs.getJoueur(0).initPaquetTest();
+        this.joueurs.getJoueur(1).getPaquet().ajoutePerso(new Personnage("epiques", "burnout", 20));
+        this.joueurs.getJoueur(1).getPaquet().ajoutePerso(new Personnage("epiques", "funk-ops", 30));
+       // ouverture de la boîte de dialogue, avec le 1er joueur en joueur courant.
+        BatailleDlg diag = new BatailleDlg(this, true, this.joueurs, 0);
+        diag.setSize(1000,600);
+        diag.setVisible(true);
+    }//GEN-LAST:event_Bataille_TestActionPerformed
+
     public void boutonActionPerformed(ActionEvent evt){
         
         JButton bt = (JButton)evt.getSource(); //récupérer le bouton cliqué
@@ -418,17 +438,17 @@ public class JeuMemory extends javax.swing.JFrame {
                 if(bonus==2)
                 {
                     Edition.append("\nUne bataille va commencer");
-                    BatailleDlg bataille = new BatailleDlg(this,true);
+                    BatailleDlg bataille = new BatailleDlg(this,true,joueurs,0);
                     bataille.setVisible(true);
-                    if(bataille.getOk())
+                    if(bataille.isOk())
                     {
-                        Edition.append();//Afficher le résulat de la bataille
+                        Edition.append("\nLe vainqueur de la bataille est : "+bataille.Vainqueur.getText());//Afficher le résulat de la bataille
                     }
                 }
             
                 bonus=-1;//Réinitialisation de la valeur du bonus à -1.
 
-                j = joueurs.getJoueur(monJeu.getIndSuivant(monJeu.getIndC()));//Le joueur courant change et est fixé au joueur suivant
+                j = joueurs.getJoueur(monJeu.getIndSuivant(monJeu.getIndice()));//Le joueur courant change et est fixé au joueur suivant
             
             }
             
@@ -445,7 +465,7 @@ public class JeuMemory extends javax.swing.JFrame {
             //suivant en donnant son pseudo.
             else
             {
-                Edition.append("\nC'est le tour de "+joueurs.getJoueur(this.monJeu.getIndSuivant(monJeu.getIndC())));//Joueur Suivant pseudo
+                Edition.append("\nC'est le tour de "+joueurs.getJoueur(this.monJeu.getIndSuivant()));//Joueur Suivant pseudo
             }
             
             //Le nombre de personnages trouvés et restants est mis à jour.
@@ -510,6 +530,7 @@ public class JeuMemory extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AjoutJoueur;
+    private javax.swing.JMenuItem Bataille_Test;
     private javax.swing.JMenuItem Cartes;
     private javax.swing.JButton Demarrer;
     private javax.swing.JTextArea Edition;

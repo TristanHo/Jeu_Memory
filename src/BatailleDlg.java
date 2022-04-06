@@ -1,3 +1,7 @@
+
+import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
@@ -9,13 +13,41 @@
  */
 public class BatailleDlg extends javax.swing.JDialog {
 
+    
+    private LesJoueurs lj; //collection des joueurs (en entrée)
+    private int indj; //indice du joueur courant (en entrée)
+    private Joueur adversaire; //adversaire sélectionné (en sortie)
+    private boolean ok; // action faite ou non (en sortie)
+    private Bataille b; // action réalisée
+
+    public boolean isOk() { return ok; }
+    public Joueur getAdversaire() { return adversaire; }
+    public Bataille getBataille(){ return b;}
+    
     /**
      * Creates new form BatailleDlg
      */
-    public BatailleDlg(java.awt.Frame parent, boolean modal) {
+    public BatailleDlg(java.awt.Frame parent, boolean modal, LesJoueurs lj, int jc) {
         super(parent, modal);//cc
         initComponents();
+        this.lj=lj;
+        this.ok=false;
+        this.indj=jc;
+        Annuler.setText("Annuler");
+        Annuler.setVisible(false);
+        MessageJ.setText(lj.getJoueur(indj).getPseudo()+" effectue une bataille contre :");
+        initListe();        
+    }
+    
+    public void initListe(){
+        DefaultListModel mod = new DefaultListModel();
         
+        for (int i = 0; i < lj.getNbJoueurs(); i++) {
+            
+            mod.addElement(lj.getJoueur(i).getPseudo());
+        }
+        ListeJ.setModel(mod);
+        ListeJ.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
     
@@ -30,7 +62,7 @@ public class BatailleDlg extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        MessageJ = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ListeJ = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
@@ -50,14 +82,18 @@ public class BatailleDlg extends javax.swing.JDialog {
         Annuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 2));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
-        jPanel5.add(jLabel1);
+        MessageJ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MessageJ.setText("jLabel1");
+        jPanel5.add(MessageJ);
 
+        ListeJ.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListeJMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(ListeJ);
 
         jPanel5.add(jScrollPane2);
@@ -106,9 +142,19 @@ public class BatailleDlg extends javax.swing.JDialog {
         jPanel4.add(Vainqueur);
 
         Demarrer.setText("Démarrer");
+        Demarrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DemarrerActionPerformed(evt);
+            }
+        });
         jPanel4.add(Demarrer);
 
         Annuler.setText("Annuler");
+        Annuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnnulerActionPerformed(evt);
+            }
+        });
         jPanel4.add(Annuler);
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.SOUTH);
@@ -116,6 +162,89 @@ public class BatailleDlg extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ListeJMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListeJMouseClicked
+        Joueur jc = lj.getJoueur(indj);
+        int ind = ListeJ.getSelectedIndex();
+         
+        if(ind !=-1)
+        {
+            if(ind==indj)
+            {
+                infosCarte1.setText("Selectionnez un autre joueur");
+            }
+            else
+            {
+                this.adversaire=lj.getJoueur(ind);
+                this.b=new Bataille(jc,this.adversaire);
+                Annuler.setVisible(true);
+                Joueur.setText(jc.getPseudo());
+                Adversaire.setText(this.adversaire.getPseudo());
+                infosCarte1.setText(jc.getPaquet().toString());
+                infosCarte2.setText(this.adversaire.getPaquet().toString());
+            }
+        }
+    }//GEN-LAST:event_ListeJMouseClicked
+
+    private void DemarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DemarrerActionPerformed
+        Joueur j = lj.getJoueur(indj);
+        
+        if(j!=null && this.adversaire!=null)
+        {
+            LesPersonnages pj = j.getPaquet();
+            LesPersonnages pa = this.adversaire.getPaquet();
+            
+            //Si les 2 joueurs ont encore des cartes
+            if(pj.getTaille()>0 && pa.getTaille()>0)
+            {
+                infosCarte1.append("\n"+pj.toString());
+                infosCarte2.append("\n"+pa.toString());
+                
+                //Affihage de la photo du premier personnage de chaque joueur sur les 
+                pj.getPerso(0).setImgBouton(Carte1);
+                pa.getPerso(0).setImgBouton(Carte2);
+                
+                int res=this.b.execute();
+                this.ok=true;
+                
+                infosCarte1.append("\n"+b.getDeroulement());
+                infosCarte2.append("\n"+b.getDeroulement());
+                infosCarte1.append("\n"+pj.toString());
+                infosCarte2.append("\n"+pa.toString());
+                
+                if(res==1){
+                    Vainqueur.setText(j.getPseudo());
+                }
+                else if(res==2)
+                {
+                    Vainqueur.setText(this.adversaire.getPseudo());
+                }
+                else if(res==0)
+                {
+                    Vainqueur.setText("Egalité");
+                }
+                else
+                {
+                    if(pj.getTaille()==0)
+                    {
+                        Vainqueur.setText("Vainqueur final : "+this.adversaire.getPseudo());
+                    }
+                    else{
+                        Vainqueur.setText("Vainqueur final : "+j.getPseudo());
+                    }
+                }
+                
+            }
+            
+            infosCarte1.append("\n\n"+j.getPaquet().getTaille()+" / "+adversaire.getPaquet().getTaille());
+        }
+    }//GEN-LAST:event_DemarrerActionPerformed
+
+    private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
+        this.ok=false;
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_AnnulerActionPerformed
     
     /**
      * @param args the command line arguments
@@ -147,7 +276,7 @@ public class BatailleDlg extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                BatailleDlg dialog = new BatailleDlg(new javax.swing.JFrame(), true);
+                BatailleDlg dialog = new BatailleDlg(new javax.swing.JFrame(), true,null,-1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -168,10 +297,10 @@ public class BatailleDlg extends javax.swing.JDialog {
     private javax.swing.JScrollPane Ic2;
     private javax.swing.JLabel Joueur;
     private javax.swing.JList<String> ListeJ;
+    private javax.swing.JLabel MessageJ;
     private javax.swing.JLabel Vainqueur;
     private javax.swing.JTextArea infosCarte1;
     private javax.swing.JTextArea infosCarte2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

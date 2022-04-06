@@ -43,7 +43,6 @@ public class VisuPersonnagesDlg extends javax.swing.JDialog {
         trombinoscope.setLayout(new GridLayout(taille-1,taille-1)); //application au JPanel trombinoscope d'une stratégie GridLayout en fonction du nombre de cartes du joueur
         for(int i=0;i<this.joueur.getPaquet().getTaille();i++){
             JButton jb = new JButton(); //déclaration d'un nouveau bouton
-            jb.setName("");
             trombinoscope.add(jb); //on ajoute le bouton au trombinoscope
         }
     }

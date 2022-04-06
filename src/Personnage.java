@@ -77,8 +77,8 @@ public class Personnage {
     
     //Méthode pour appliquer sur un bouton la photo du personnage, en prenant en compte les dimensions du bouton
     public void setImgBouton(JButton jb) {
-    Image img = photo.getScaledInstance(jb.getWidth(), jb.getHeight(), Image.SCALE_SMOOTH);
-    jb.setIcon(new ImageIcon(img));
+        Image img = photo.getScaledInstance(jb.getWidth(), jb.getHeight(), Image.SCALE_SMOOTH);
+        jb.setIcon(new ImageIcon(img));
     }
 
 

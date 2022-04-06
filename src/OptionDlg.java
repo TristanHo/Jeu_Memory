@@ -180,8 +180,6 @@ public class OptionDlg extends javax.swing.JDialog {
         jScrollPane1.setViewportView(Edition);
 
         jPanel5.add(jScrollPane1);
-
-        BPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lara.jpg"))); // NOI18N
         jPanel5.add(BPhoto);
 
         jPanel1.add(jPanel5);

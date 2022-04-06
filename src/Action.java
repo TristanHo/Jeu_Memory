@@ -12,6 +12,30 @@ public abstract class Action {
 	private Joueur j;
 	private String descriptif;
 	private String deroulement;
+
+    public Joueur getJ() {
+        return j;
+    }
+
+    public void setJ(Joueur j) {
+        this.j = j;
+    }
+
+    public String getDescriptif() {
+        return descriptif;
+    }
+
+    public void setDescriptif(String descriptif) {
+        this.descriptif = descriptif;
+    }
+
+    public String getDeroulement() {
+        return deroulement;
+    }
+
+    public void setDeroulement(String deroulement) {
+        this.deroulement = deroulement;
+    }
 	public Action(){
 		this.j = null;
                 this.descriptif ="";

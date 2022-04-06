@@ -171,11 +171,6 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JButton" name="BPhoto">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/lara.jpg"/>
-                </Property>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
