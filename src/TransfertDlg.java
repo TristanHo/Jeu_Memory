@@ -73,6 +73,7 @@ public class TransfertDlg extends javax.swing.JDialog {
                     boutonActionPerformed(evt);
                 }
             });
+            PanneauG.add(b);
         }
         this.pack();
     }
@@ -94,7 +95,11 @@ public class TransfertDlg extends javax.swing.JDialog {
     }
    
     private void affichePanneau(){
-        //à compléter
+        LesPersonnages lcs = this.lj.getJoueur(indj).getPaquet();
+        for(int i =0; i<lcs.getTaille();i++){
+            JButton b = (JButton)PanneauG.getComponent(i);
+            lcs.getPerso(i).setImgBouton(b);
+        }
     }
 
     
@@ -201,7 +206,7 @@ public class TransfertDlg extends javax.swing.JDialog {
 
     private void FermerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FermerActionPerformed
         this.setVisible(false);
-        //this.dispose(); mettre cette ligne ?
+        this.dispose(); 
     }//GEN-LAST:event_FermerActionPerformed
 
     /**
