@@ -17,7 +17,7 @@ public class OptionDlg extends javax.swing.JDialog {
      * Creates new form OptionDlg
      */
     private LesJoueurs lj;
-    private LesJoueurs JoueursDef;//liste des joueurs par défaut
+    private LesJoueurs joueursDef; //liste des joueurs par défaut
     private boolean ok;
     private int nc;
     
@@ -25,30 +25,31 @@ public class OptionDlg extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         lj = new LesJoueurs();
-        JoueursDef = new LesJoueurs();
+        joueursDef = new LesJoueurs();
         ok = false;
         Niv1.setSelected(true);
         nc = 4;
-        InitJoueurs();
+        InitJoueurs(); // remplir joueursDef
     }
-    
+    //Accesseurs
     public LesJoueurs getJoueurs(){return this.lj;}
     public boolean getOk(){return this.ok;}
     public int getNiveau(){return this.nc;}
     
     public void InitJoueurs(){
+        //Les joueur qu'on peut ajouter par défaut
         Joueur j=new Joueur("Lara", "epiques");
         j.setPhoto(new ImageIcon(getClass().getResource("/img/lara.jpg")));
-        JoueursDef.ajouteJoueur(j);
+        joueursDef.ajouteJoueur(j);
         j=new Joueur("Jack", "rares");
         j.setPhoto(new ImageIcon(getClass().getResource("/img/jack.png")));
-        JoueursDef.ajouteJoueur(j);
+        joueursDef.ajouteJoueur(j);
         j=new Joueur("Jean-Sébastien", "alpins-femmes");
         j.setPhoto(new ImageIcon(getClass().getResource("/img/bach.jpg")));
-        JoueursDef.ajouteJoueur(j);
+        joueursDef.ajouteJoueur(j);
         j=new Joueur("Mozart", "communs");
         j.setPhoto(new ImageIcon(getClass().getResource("/img/mozart.jpg")));
-        JoueursDef.ajouteJoueur(j);
+        joueursDef.ajouteJoueur(j);
 
     }
 
@@ -180,7 +181,7 @@ public class OptionDlg extends javax.swing.JDialog {
 
         jPanel5.add(jScrollPane1);
 
-        BPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lara.jpg"))); // NOI18N
+        BPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lara.jpg"))); // NOI18N
         jPanel5.add(BPhoto);
 
         jPanel1.add(jPanel5);
@@ -217,7 +218,7 @@ public class OptionDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_AnnulerActionPerformed
 
     private void Niv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Niv1ActionPerformed
-       this.nc = 4;
+       this.nc = 4; 
     }//GEN-LAST:event_Niv1ActionPerformed
 
     private void Niv10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Niv10ActionPerformed
@@ -233,47 +234,47 @@ public class OptionDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_Niv32ActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        // TODO add your handling code here:
+        //En fonction des cases cochées, on rajoute les joueurs à la liste des joueurs renvoyée par la JDialog
         if(CaseLara.isSelected())
-            lj.ajouteJoueur(JoueursDef.getJoueur(0));
+            lj.ajouteJoueur(joueursDef.getJoueur(0));
         if(CaseJack.isSelected())
-            lj.ajouteJoueur(JoueursDef.getJoueur(1));
+            lj.ajouteJoueur(joueursDef.getJoueur(1));
         if(CaseJean.isSelected())
-            lj.ajouteJoueur(JoueursDef.getJoueur(2));
+            lj.ajouteJoueur(joueursDef.getJoueur(2));
         if(CaseAmadeus.isSelected())
-            lj.ajouteJoueur(JoueursDef.getJoueur(3));
-        this.ok = true;
+            lj.ajouteJoueur(joueursDef.getJoueur(3));
+        this.ok = true; //On renvoie true car l'utilisateur a cliqué sur Valider avant de quitter la fenêtre
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_ValiderActionPerformed
 
     private void CaseLaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseLaraActionPerformed
-        // TODO add your handling code here:
-        Joueur j=JoueursDef.getJoueur(0);
-        Edition.setText(j.toString());
-        Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
-        BPhoto.setIcon(new ImageIcon(img));
+        //Lorsque la case est cochée
+        Joueur j=joueursDef.getJoueur(0); //on récupère le joueur correspondant dans la liste de joueurs par défaut
+        Edition.setText(j.toString()); //on affiche ses informations dans la zone d'édition
+        Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH); //On récupère la photo du joueur en tant qu'image, en l'adaptant aux dimensions du bouton
+        BPhoto.setIcon(new ImageIcon(img)); //On applique sa photo en tant qu'ImageIcon au bouton en bas à droite
     }//GEN-LAST:event_CaseLaraActionPerformed
 
     private void CaseJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseJackActionPerformed
-        // TODO add your handling code here:
-        Joueur j=JoueursDef.getJoueur(1);
+        //idem que CaseLara
+        Joueur j=joueursDef.getJoueur(1);
         Edition.setText(j.toString());
         Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
         BPhoto.setIcon(new ImageIcon(img));
     }//GEN-LAST:event_CaseJackActionPerformed
 
     private void CaseJeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseJeanActionPerformed
-        // TODO add your handling code here:
-        Joueur j=JoueursDef.getJoueur(2);
+        //idem que CaseLara
+        Joueur j=joueursDef.getJoueur(2);
         Edition.setText(j.toString());
         Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
         BPhoto.setIcon(new ImageIcon(img));
     }//GEN-LAST:event_CaseJeanActionPerformed
 
     private void CaseAmadeusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaseAmadeusActionPerformed
-        // TODO add your handling code here:
-        Joueur j=JoueursDef.getJoueur(3);
+        //idem que CaseLara
+        Joueur j=joueursDef.getJoueur(3);
         Edition.setText(j.toString());
         Image img = j.getPhoto().getImage().getScaledInstance(BPhoto.getWidth(), BPhoto.getHeight(), Image.SCALE_SMOOTH);
         BPhoto.setIcon(new ImageIcon(img));

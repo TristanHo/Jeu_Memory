@@ -19,55 +19,53 @@ import javax.swing.JFileChooser;
    
 public class SaisieJoueurDlg extends javax.swing.JDialog {
 
+    //déclaration des attributs de la classe
+    private Joueur j;
+    private boolean ok;
+    private ImageIcon photo;
+    private LesPersonnages lp;
     
-     private Joueur j;
-     private boolean ok;
-     private ImageIcon photo;
-     private LesPersonnages lp;
-     
-     public Joueur getJoueur()
-     {
-         return this.j;
-     }
-     public boolean getOk()
-     {
-         return this.ok;
-     }
-     
+    //Accesseurs des attributs
+    public Joueur getJoueur(){return this.j;}
+    public boolean getOk(){return this.ok;}
+
     /**
      * Creates new form SaisieJoueurDlg
      * @param parent
      * @param modal
      * @param lp
      */
+    
+    //Constructeur de la classe, prenant comme paramètre supplémentaire une liste de personnges lp
     public SaisieJoueurDlg(java.awt.Frame parent, boolean modal ,LesPersonnages lp) {
-        super(parent, modal);
+        super(parent, modal); //appel du constructeur de la classe mère
         initComponents();
-        this.ok=false;
+        //Initialisation des attributs
+        this.ok=false; 
         this.lp=lp;
         j = new Joueur();
-        initListeFamilles();
-        this.ListeFamilles.setSelectedIndex(0);
+        initListeFamilles(); //méthode pour remplir la JList avec les noms des familles, sans doublon
+        this.ListeFamilles.setSelectedIndex(0); //sélection par défaut du premier élément de la JList
         
     }
     
     private void initListeFamilles(){
-        DefaultListModel dlm = new DefaultListModel();
+        DefaultListModel dlm = new DefaultListModel(); //déclaration d'une variable qui sera le modèle de la JList
         
-        for(int i = 0; i<lp.getTaille();i++)
+        for(int i = 0; i<lp.getTaille();i++) //on parcourt la liste des personnages
         {
-            String famille = lp.getPerso(i).getFamille();
-            boolean contient = false;
-            for(int j=0;j<dlm.size();j++)
+            String famille = lp.getPerso(i).getFamille(); //on récupère la famille du personnage en indice i de la liste
+            boolean contient = false; //déclaration d'un booléen, qui permettra de vérifier les doublons
+            for(int j=0;j<dlm.size();j++) //parcours du modèle
             {
-                if(dlm.get(j).equals(famille))
+                if(dlm.get(j).equals(famille)) //si le modèle contient déjà le nom de la famille, le booléen passe à true
                     contient=true;
             }
             
             if(contient==false)
-            dlm.addElement(famille);
+            dlm.addElement(famille); //si le booléen est toujours à false, c'est-à-dire que le modèle ne contient pas déjà cette famille, on l'ajoute
         }
-        this.ListeFamilles.setModel(dlm);
+        this.ListeFamilles.setModel(dlm); //on applique le modèle à la JList
     }
 
     /**
@@ -79,9 +77,9 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_NORTH = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel_WEST = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -93,7 +91,7 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         Parcourir = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel_CENTER = new javax.swing.JPanel();
         Photo = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         Annuler = new javax.swing.JButton();
@@ -103,24 +101,24 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jLabel1.setText("Créez votre joueur");
-        jPanel1.add(jLabel1);
+        jPanel_NORTH.add(jLabel1);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(jPanel_NORTH, java.awt.BorderLayout.NORTH);
 
-        jPanel2.setLayout(new java.awt.GridLayout(3, 1));
+        jPanel_WEST.setLayout(new java.awt.GridLayout(3, 1));
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
         jLabel6.setText("Donnez votre pseudo :");
-        jPanel4.add(jLabel6, java.awt.BorderLayout.CENTER);
+        jPanel4.add(jLabel6, java.awt.BorderLayout.NORTH);
 
         Pseudo.setColumns(20);
         Pseudo.setRows(5);
         jScrollPane3.setViewportView(Pseudo);
 
-        jPanel4.add(jScrollPane3, java.awt.BorderLayout.PAGE_END);
+        jPanel4.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
-        jPanel2.add(jPanel4);
+        jPanel_WEST.add(jPanel4);
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
@@ -131,7 +129,7 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
 
         jPanel5.add(jScrollPane4, java.awt.BorderLayout.CENTER);
 
-        jPanel2.add(jPanel5);
+        jPanel_WEST.add(jPanel5);
 
         jPanel6.setLayout(new java.awt.BorderLayout());
 
@@ -146,12 +144,12 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         });
         jPanel6.add(Parcourir, java.awt.BorderLayout.CENTER);
 
-        jPanel2.add(jPanel6);
+        jPanel_WEST.add(jPanel6);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(jPanel_WEST, java.awt.BorderLayout.WEST);
 
-        jPanel3.setLayout(new java.awt.BorderLayout());
-        jPanel3.add(Photo, java.awt.BorderLayout.CENTER);
+        jPanel_CENTER.setLayout(new java.awt.BorderLayout());
+        jPanel_CENTER.add(Photo, java.awt.BorderLayout.CENTER);
 
         jPanel7.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -171,9 +169,9 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         });
         jPanel7.add(Valider);
 
-        jPanel3.add(jPanel7, java.awt.BorderLayout.SOUTH);
+        jPanel_CENTER.add(jPanel7, java.awt.BorderLayout.SOUTH);
 
-        getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel_CENTER, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -187,11 +185,11 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         {
             //On récupére le chemin d'acces à la photo
             String path = jf.getSelectedFile().getPath();
-            //On récupére l'mage dans l'ordi
+            //On récupére l'image dans l'ordi
             Image img=Toolkit.getDefaultToolkit().getImage(path);
             //On redimensionne la photo pour qu'elle prenne pas plus ni moins de place que le bouton Photo
             img=img.getScaledInstance(Photo.getWidth()-10, Photo.getHeight()-10, Image.SCALE_DEFAULT);
-            //On costruit l'ImageIcon à partir de l'image séléctionnée
+            //On construit l'ImageIcon à partir de l'image séléctionnée
             photo = new ImageIcon(img);
             //On met l'image sur le bouton
             Photo.setIcon(photo);
@@ -199,34 +197,36 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_ParcourirActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-       if(!"".equals(this.Pseudo.getText()))
+       if(!this.Pseudo.getText().equals("")) //on vérifie qu'un pseudo a bien été saisi
        {
-           if(this.ListeFamilles.getSelectedIndex()!=-1)
-           {
-               
-           
+           if(this.ListeFamilles.getSelectedIndex()!=-1) //on vérifie qu'une valeur a bien été sélectionnée dans la liste
+           {    
+                //si les conditions précédentes sont réalisées, on crée un nouveau joueur avec le pseudo et la famille sélectionnée
                 this.j = new Joueur(this.Pseudo.getText(),this.ListeFamilles.getSelectedValue());
-                if(this.photo!=null)
+                if(this.photo!=null) //si une photo a bien été sélectionnée
                 {
-                    j.setPhoto(photo);
-                    this.setVisible(false);
-                    this.dispose();
-                    this.ok=true;
+                    j.setPhoto(photo); //on applique cette photo au joueur créé
+                    this.setVisible(false); //on ferme la JDialog
+                    this.dispose(); //fermeture de l'instance associée
+                    this.ok=true; //on met le booléen à true, pour spécifier qu'un joueur a bien été créé
                 }
            }
            else
            {
-               j.setFamillePref(this.ListeFamilles.getModel().getElementAt(0));
+               //si aucune famille n'a été sélectionnée, on applique au joueur la première famille de la liste
+               j.setFamillePref(this.ListeFamilles.getModel().getElementAt(0)); 
                
            }
        } 
        else
        {
+           //si aucun pseudo n'a été rentré, on met un message d'erreur dans la JTextArea
            this.Pseudo.setText("Vous n'avez pas saisi de pseudo !!!");
        }
     }//GEN-LAST:event_ValiderActionPerformed
 
     private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
+        //si on clique sur le bouton Annuler de la JDialog, celle-ci se ferme et le booléen est mis à 0, pour indiquer qu'aucun joueur n'a été créé
         this.ok=false;
         this.setVisible(false);
         this.dispose();
@@ -244,13 +244,13 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel_CENTER;
+    private javax.swing.JPanel jPanel_NORTH;
+    private javax.swing.JPanel jPanel_WEST;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables

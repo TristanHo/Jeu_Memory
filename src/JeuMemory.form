@@ -32,20 +32,20 @@
             <Property name="text" type="java.lang.String" value="Visualiser"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="Joueur">
+            <MenuItem class="javax.swing.JMenuItem" name="Joueurs">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Joueur"/>
+                <Property name="text" type="java.lang.String" value="Joueurs"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JoueurActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JoueursActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="Carte">
+            <MenuItem class="javax.swing.JMenuItem" name="Cartes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cartes"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CarteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CartesActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -218,6 +218,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="D&#xe9;marrer"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DemarrerActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="Recommencer">
               <Properties>

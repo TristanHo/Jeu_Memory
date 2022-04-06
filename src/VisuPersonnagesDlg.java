@@ -18,29 +18,33 @@ public class VisuPersonnagesDlg extends javax.swing.JDialog {
     /**
      * Creates new form VisuPersonnagesDlg
      */
+     
+    //déclaration de l'attribut 
     private Joueur joueur;
     
     public VisuPersonnagesDlg(java.awt.Frame parent, boolean modal, Joueur joueur) {
-        super(parent, modal);
+        super(parent, modal); //appel du constructeur de la classe mère
         initComponents();
         //this.joueur = joueur;
         /*LesPersonnages p = new LesPersonnages(4);
         joueur = new Joueur("Lara", "epiques");
         this.joueur.setPhoto(new ImageIcon(getClass().getResource("/img/lara.jpg")));
         this.joueur.setPaquet(p);*/
+        //initialisation de l'attribut avec le joueur passé en paramètre
         this.joueur = joueur;
-        Joueur.setText("Cartes du joueur : "+this.joueur.getPseudo());
-        Score.setText("Score : "+this.joueur.getScore());
+        Joueur.setText("Cartes du joueur : "+this.joueur.getPseudo()); //modification du JLabel Joueur de la JDialog
+        Score.setText("Score : "+this.joueur.getScore()); //modification du JLabel Score de la JDialog
+        //appel d'une méthode pour construire dynamiquement le trombinoscope des personnages du joueur
         initPanneau();
     }
     
     public void initPanneau(){
-        int taille = this.joueur.getPaquet().getTaille();
-        trombinoscope.setLayout(new GridLayout(taille-1,taille-1));
+        int taille = this.joueur.getPaquet().getTaille(); //récupération de la taille du paquet du joueur
+        trombinoscope.setLayout(new GridLayout(taille-1,taille-1)); //application au JPanel trombinoscope d'une stratégie GridLayout en fonction du nombre de cartes du joueur
         for(int i=0;i<this.joueur.getPaquet().getTaille();i++){
-            JButton jb = new JButton();
+            JButton jb = new JButton(); //déclaration d'un nouveau bouton
             jb.setName("");
-            trombinoscope.add(jb);
+            trombinoscope.add(jb); //on ajoute le bouton au trombinoscope
         }
     }
     /**
@@ -52,27 +56,27 @@ public class VisuPersonnagesDlg extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_CENTER = new javax.swing.JPanel();
         Joueur = new javax.swing.JLabel();
         Score = new javax.swing.JLabel();
         trombinoscope = new javax.swing.JPanel();
         Afficher = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel_CENTER.setLayout(new java.awt.BorderLayout());
 
         Joueur.setText("Cartes du joueur :");
-        jPanel1.add(Joueur, java.awt.BorderLayout.NORTH);
+        jPanel_CENTER.add(Joueur, java.awt.BorderLayout.NORTH);
 
         Score.setText("Score : ");
-        jPanel1.add(Score, java.awt.BorderLayout.SOUTH);
+        jPanel_CENTER.add(Score, java.awt.BorderLayout.SOUTH);
 
         trombinoscope.setLayout(new java.awt.GridLayout(2, 2));
-        jPanel1.add(trombinoscope, java.awt.BorderLayout.CENTER);
+        jPanel_CENTER.add(trombinoscope, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel_CENTER, java.awt.BorderLayout.CENTER);
 
         Afficher.setText("Afficher");
         Afficher.addActionListener(new java.awt.event.ActionListener() {
@@ -87,12 +91,10 @@ public class VisuPersonnagesDlg extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AfficherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfficherActionPerformed
-        // TODO add your handling code here:
-        for(int i=0;i<this.joueur.getPaquet().getTaille();i++){
-            JButton jb = (JButton)trombinoscope.getComponent(i);
-            Image imgperso = joueur.getPaquet().getPerso(i).getPhoto().getScaledInstance(jb.getWidth(),jb.getHeight(),Image.SCALE_SMOOTH);
-            jb.setIcon(new ImageIcon(imgperso));
-        }
+        for(int i=0;i<this.joueur.getPaquet().getTaille();i++){ //on parcourt la liste de personnages
+            JButton jb = (JButton)trombinoscope.getComponent(i); //on récupère le bouton d'indice i dans le JPanel
+            this.joueur.getPaquet().getPerso(i).setImgBouton(jb);  //on affecte à ce bouton la photo du personnage correspondant
+        } 
     }//GEN-LAST:event_AfficherActionPerformed
 
     /**
@@ -141,7 +143,7 @@ public class VisuPersonnagesDlg extends javax.swing.JDialog {
     private javax.swing.JButton Afficher;
     private javax.swing.JLabel Joueur;
     private javax.swing.JLabel Score;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel_CENTER;
     private javax.swing.JPanel trombinoscope;
     // End of variables declaration//GEN-END:variables
 }

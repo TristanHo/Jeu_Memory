@@ -20,42 +20,47 @@ public class VisuJoueursDlg extends javax.swing.JDialog {
     /**
      * Creates new form VisuJoueursDlg
      */
+    
+    //déclaration de l'attribut de la classe
     private LesJoueurs lj; 
     
+    //Constructeur de la classe, prenant comme paramètre supplémentaire une liste de joueurs lj
     public VisuJoueursDlg(java.awt.Frame parent, boolean modal, LesJoueurs lj) {
-        super(parent, modal);
+        super(parent, modal); //appel du constructeur de la classe mère
         initComponents();
+        //Initialisation des attributs
         this.lj=lj;
-        initTrombi();
+        initTrombi(); //appel d'une méthode pour construire dynamiquement le trombinoscope de joueurs
         
     }
     
     private void initTrombi(){
-        int nb = this.lj.getNbJoueurs();
+        int nb = this.lj.getNbJoueurs(); //récupération du nombre joueurs de la liste passée en paramètre lors de l'appel de la JDialog
+        //application d'une stratégie GridLayout au JPanel Panneau en fonction du nombre de joueurs
         if(nb<=1){
             Panneau.setLayout(new GridLayout(1,1));
         }
         else   
-        Panneau.setLayout(new GridLayout(nb-1, nb-1));
-        for (int i=0; i< nb; i++)
+            Panneau.setLayout(new GridLayout(nb-1, nb-1)); 
+        for (int i=0; i< nb; i++) //on parcourt la liste de joueurs
         {
-            JButton jb= new JButton();
-            Joueur j= lj.getJoueur(i);
-            jb.setName(""+i);
+            JButton jb= new JButton(); //déclaration d'un nouveau JButton
+            Joueur j= lj.getJoueur(i); //récupération du joueur en indice i de la liste
+            jb.setName(""+i); //le nom du bouton est l'indice du joueur
+            //abonnement du bouton à un écouteur d'événement
             jb.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AfficheInfosJoueur(evt);
                 }
                 });
-        
-        Panneau.add(jb);
+        Panneau.add(jb); //ajout du bouton au JPanel Panneau
         }
-        this.pack();
-    } // pour ajuster correctement la taille des composants après les ajouts si besoin
+        this.pack(); //pour ajuster correctement la taille des composants après les ajouts si besoin
+    } 
 
     private void AfficheInfosJoueur(java.awt.event.ActionEvent evt) {
-        JButton jb = (JButton) evt.getSource();
-        Edition.setText(lj.getJoueur(Integer.parseInt(jb.getName())).toString());
+        JButton jb = (JButton) evt.getSource(); //Lors d'un clic sur un bouton, on récupère le bouton à l'origine de l'événement
+        Edition.setText(lj.getJoueur(Integer.parseInt(jb.getName())).toString()); //On affiche les informations du joueur correspondant dans la JTextArea Edition
         
     }
 
@@ -124,12 +129,12 @@ public class VisuJoueursDlg extends javax.swing.JDialog {
 
     private void AfficherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfficherActionPerformed
         JButton jb;
-        for(int i =0;i<Panneau.getComponents().length;i++)
+        for(int i =0;i<Panneau.getComponents().length;i++) //on parcourt le JPanel Panneau
         {
-           jb= (JButton)Panneau.getComponent(i);
-           Image image = this.lj.getJoueur(i).getPhoto().getImage();
-           Image adaptee = image.getScaledInstance(jb.getWidth(), jb.getHeight(), Image.SCALE_SMOOTH);
-           jb.setIcon(new ImageIcon(adaptee));
+           jb= (JButton)Panneau.getComponent(i); //on récupère les boutons
+           Image image = this.lj.getJoueur(i).getPhoto().getImage(); //on récupère la photo du joueur
+           Image adaptee = image.getScaledInstance(jb.getWidth(), jb.getHeight(), Image.SCALE_SMOOTH); //on adapte l'image à la taille du bouton
+           jb.setIcon(new ImageIcon(adaptee)); //on applique l'image au bouton correspondant
         }
     }//GEN-LAST:event_AfficherActionPerformed
 
