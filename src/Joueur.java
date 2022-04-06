@@ -58,7 +58,7 @@ public class Joueur {
     public Joueur(String pseudo, String famillePref){
         this.pseudo=pseudo;
         this.famillePref=famillePref;
-        this.photo = new ImageIcon();
+        this.photo = new ImageIcon(getClass().getResource("/img/anonyme.png"));
         this.paquet = new LesPersonnages();
     }
     

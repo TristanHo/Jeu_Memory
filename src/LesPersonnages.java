@@ -56,6 +56,21 @@ public class LesPersonnages {
         return lp;
     }
     
+    public ArrayList<String> getFamilles()
+    {   ArrayList<String> lst = new ArrayList<String>();
+        for (int j=0; j<this.persos.size(); j++)
+        {   
+            Personnage p = this.persos.get(j);
+            boolean trouve = false;
+            for (int i=0; i< lst.size(); i++)
+                if (lst.get(i).equals(p.getFamille()))
+                    trouve = true;
+                if (!trouve) 
+                    lst.add(p.getFamille());
+        }
+        return lst; 
+    }
+    
     //Retirer de la liste un personnage passé en paramètre 
     public void retirePerso(Personnage p)
     { 

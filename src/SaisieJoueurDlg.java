@@ -2,6 +2,7 @@
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.*;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -51,19 +52,10 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
     
     private void initListeFamilles(){
         DefaultListModel dlm = new DefaultListModel(); //déclaration d'une variable qui sera le modèle de la JList
+        ArrayList<String> collectionFamilles = lp.getFamilles();
         
-        for(int i = 0; i<lp.getTaille();i++) //on parcourt la liste des personnages
-        {
-            String famille = lp.getPerso(i).getFamille(); //on récupère la famille du personnage en indice i de la liste
-            boolean contient = false; //déclaration d'un booléen, qui permettra de vérifier les doublons
-            for(int j=0;j<dlm.size();j++) //parcours du modèle
-            {
-                if(dlm.get(j).equals(famille)) //si le modèle contient déjà le nom de la famille, le booléen passe à true
-                    contient=true;
-            }
-            
-            if(contient==false)
-            dlm.addElement(famille); //si le booléen est toujours à false, c'est-à-dire que le modèle ne contient pas déjà cette famille, on l'ajoute
+        for (int i = 0; i < collectionFamilles.size(); i++) {
+            dlm.addElement(collectionFamilles.get(i));
         }
         this.ListeFamilles.setModel(dlm); //on applique le modèle à la JList
     }
