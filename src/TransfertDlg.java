@@ -16,7 +16,7 @@ public class TransfertDlg extends javax.swing.JDialog {
 
     private LesJoueurs lj; //collection des joueurs, pour initialiser la liste déroulante avec les pseudos des joueurs
     private int indj; //indice joueur courant
-    // private Transfert tc; // cette classe sera étudiée ultérieurement – laisser l’attribut en commentaire
+    private Transfert tc; //attribut pour gérer le transfert
     private boolean ok; // indicateur pour savoir le transfert a bien été effectué.
     private int indjs; //indice du joueur sélectionné dans la liste déroulante
     private String fs; //famille du personnage sélectionné en cliquant sur un des personnages du joueur sélectionné
@@ -46,13 +46,13 @@ public class TransfertDlg extends javax.swing.JDialog {
         this.ok = bool;
     }
     
-    /*public Transfert getTc(){
+    public Transfert getTc(){
         return this.tc;
     }
     
     public void setTc(Transfert t){
         this.tc = t;
-    }*/
+    }
     
     public void initCombo(){
         for(int i=0;i<this.lj.getNbJoueurs();i++)
