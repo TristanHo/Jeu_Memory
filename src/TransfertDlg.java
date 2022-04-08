@@ -54,11 +54,14 @@ public class TransfertDlg extends javax.swing.JDialog {
         this.tc = t;
     }
     
+    //Remplissage de la JComboBox avec le nom des Joueurs
     public void initCombo(){
         for(int i=0;i<this.lj.getNbJoueurs();i++)
             ComboJoueurs.addItem(this.lj.getJoueur(i).getPseudo());
     }
     
+    //Permet de définir la stratégie du panneau et de lui ajouter les boutons nécessaires
+    //pour afficher les personnages
     public void initPanneau(){
         PanneauG.removeAll(); //on retire tous les éléments du panneau
         this.repaint(); //on le réaffiche
@@ -80,6 +83,7 @@ public class TransfertDlg extends javax.swing.JDialog {
         this.pack();
     }
     
+    //Evenement exécuté en cas de clc sur un bouton du panneau
     private void boutonActionPerformed(ActionEvent evt){
         LesPersonnages lp = lj.getJoueur(indjs).getPaquet(); //récupération du paquet du joueur sélectionné
         int t = lp.getTaille(); //nombre de personnages du paquet
@@ -99,7 +103,8 @@ public class TransfertDlg extends javax.swing.JDialog {
         LesPersonnages lps = lp.getPersosFamille(fs); //récupération des personnages du paquet correspondant à la même famille
         Infos.setText("Vous pouvez récupérer "+lps.getTaille()+" personnages : \n"+lps); //affichage du nombre de personnages de la même famille récupérables
     }
-   
+    
+    //Permet d'appliquer les photos des personnages sur les boutons du panneau
     private void affichePanneau(){
         LesPersonnages lcs = this.lj.getJoueur(indjs).getPaquet(); //récupération du paquet du joueur sélectionné
         for(int i =0; i<lcs.getTaille();i++){ 

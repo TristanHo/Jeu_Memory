@@ -31,17 +31,18 @@ public class Transfert extends Action {
         this.cartesTransferees = new LesPersonnages();
     }
     
+    //Gère le transfert de cartes de la bataille entre deux joueurs
     public int execute() { 
         int res=-1;
-        if(this.fp != null){
-            this.cartesTransferees = this.cible.getPaquet().retirePersosFamille(this.fp);
-            this.getJ().getPaquet().ajoutePersos(cartesTransferees);
-            this.setDeroulement(this.getJ().getPseudo()+" a récupéré les cartes de la famille "+fp+" de "+this.cible.getPseudo());
+        if(this.fp != null){ //on vérifie qu'il y a bien une famille sélectionnée, c'est-à-dire une carte sélectionnée
+            this.cartesTransferees = this.cible.getPaquet().retirePersosFamille(this.fp); //on stocke l'ensemble des personnages à transférer
+            this.getJ().getPaquet().ajoutePersos(cartesTransferees); //on les ajoute au paquet du joueur effectuant la bataille
+            this.setDeroulement(this.getJ().getPseudo()+" a récupéré les cartes de la famille "+fp+" de "+this.cible.getPseudo()); //On met à jour le déroulement de cette action
             if(this.cartesTransferees.getTaille() == 0){
-                res = 0;
+                res = 0; //Si aucune carte n'est transférée
             }
             else
-                res = this.cartesTransferees.getTaille();
+                res = this.cartesTransferees.getTaille(); //On renvoie le nombre de cartes transférées
         }
         return res;
     }
