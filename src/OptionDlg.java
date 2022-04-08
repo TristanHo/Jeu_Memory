@@ -24,10 +24,10 @@ public class OptionDlg extends javax.swing.JDialog {
     public OptionDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        lj = new LesJoueurs();
-        joueursDef = new LesJoueurs();
-        ok = false;
-        Niv1.setSelected(true);
+        lj = new LesJoueurs(); //listes des joueurs créés
+        joueursDef = new LesJoueurs(); //liste des joueurs par défauts
+        ok = false; //booléen pour vérifier les actions dans la JDialog
+        Niv1.setSelected(true); 
         nc = 4;
         InitJoueurs(); // remplir joueursDef
     }
@@ -36,11 +36,12 @@ public class OptionDlg extends javax.swing.JDialog {
     public boolean getOk(){return this.ok;}
     public int getNiveau(){return this.nc;}
     
+    //Permet de remplir la liste des joueurs créés par défaut
     public void InitJoueurs(){
-        //Les joueur qu'on peut ajouter par défaut
-        Joueur j=new Joueur("Lara", "epiques");
-        j.setPhoto(new ImageIcon(getClass().getResource("/img/lara.jpg")));
-        joueursDef.ajouteJoueur(j);
+        Joueur j=new Joueur("Lara", "epiques"); //création d'un joueur
+        j.setPhoto(new ImageIcon(getClass().getResource("/img/lara.jpg"))); //on lui affecte une photo
+        joueursDef.ajouteJoueur(j); //on l'ajoute à la liste des joueurs par défaut
+        //Idem pour les autres joueurs par défaut
         j=new Joueur("Jack", "rares");
         j.setPhoto(new ImageIcon(getClass().getResource("/img/jack.png")));
         joueursDef.ajouteJoueur(j);

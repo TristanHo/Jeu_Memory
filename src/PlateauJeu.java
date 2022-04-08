@@ -37,7 +37,7 @@ public class PlateauJeu {
     //Récupérer le nombre de cases (nombre de personnages)
     public int getNbc() { return this.nblig*this.nbcol/2; }
     
-    
+    //Initialiser chaque case du plateau
     public void initPlateauJeu(){ 
         int k=0;
         for(int i=0; i<this.nblig; i++)
@@ -45,7 +45,8 @@ public class PlateauJeu {
                 tab[i][j]=(k++)%this.nbp; //on numérote de 0 jusqu'au nombre de persos les cases
         melange();
     }
-
+    
+    //Invalider les deux cases quand le joueur a trouvé les deux personnages
     public void invalide(int l1, int c1, int l2, int c2){
         //Si le joueur a trouvé les deux persos, on donne comme valeur au case -1, ce qui signifie qu'il n'y a plus de perso
         tab[l1][c1]=-1;
@@ -72,10 +73,12 @@ public class PlateauJeu {
         }
     }
 
+    //Vérifier si le jeu est vide
     public boolean jeuVide(){
         return this.nbp==0; //si le jeu est vide (0 personnages), cette méthode renvoie true
     }
     
+    //Vérifier qu'une case est valide (contient un personnage)
     public boolean estValide(int l, int c){
         //on vérifie si la case est bien numérotée, c'est-à-dire qu'elle contient un perso
         if(tab[l][c]>-1)
@@ -84,6 +87,7 @@ public class PlateauJeu {
             return false;
     }
 
+    //Mettre fin au jeu
     public void termineJeu(){ 
         //si le jeu est terminé, toutes les cases prennent comme valeur -1 (case vide)
         for(int i =0; i< this.nblig;i++)

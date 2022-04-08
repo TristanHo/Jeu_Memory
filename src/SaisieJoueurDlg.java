@@ -50,6 +50,7 @@ public class SaisieJoueurDlg extends javax.swing.JDialog {
         
     }
     
+    //Remplissage de la JList avec le nom des familles des cartes de la partie
     private void initListeFamilles(){
         DefaultListModel dlm = new DefaultListModel(); //déclaration d'une variable qui sera le modèle de la JList
         ArrayList<String> collectionFamilles = lp.getFamilles();

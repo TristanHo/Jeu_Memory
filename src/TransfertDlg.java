@@ -83,7 +83,7 @@ public class TransfertDlg extends javax.swing.JDialog {
         this.pack();
     }
     
-    //Evenement exécuté en cas de clc sur un bouton du panneau
+    //Evenement exécuté en cas de clic sur un bouton du panneau
     private void boutonActionPerformed(ActionEvent evt){
         LesPersonnages lp = lj.getJoueur(indjs).getPaquet(); //récupération du paquet du joueur sélectionné
         int t = lp.getTaille(); //nombre de personnages du paquet

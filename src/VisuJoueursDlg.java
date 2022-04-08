@@ -34,6 +34,7 @@ public class VisuJoueursDlg extends javax.swing.JDialog {
         
     }
     
+    //Initialisation du panneau pour afficher les joueurs (stratégie et boutons pour afficher les photos)
     private void initTrombi(){
         int nb = this.lj.getNbJoueurs(); //récupération du nombre joueurs de la liste passée en paramètre lors de l'appel de la JDialog
         //application d'une stratégie GridLayout au JPanel Panneau en fonction du nombre de joueurs
@@ -57,7 +58,8 @@ public class VisuJoueursDlg extends javax.swing.JDialog {
         }
         this.pack(); //pour ajuster correctement la taille des composants après les ajouts si besoin
     } 
-
+    
+    //Action effectuée lorsque l'utilisateur clique sur un bouton
     private void AfficheInfosJoueur(java.awt.event.ActionEvent evt) {
         JButton jb = (JButton) evt.getSource(); //Lors d'un clic sur un bouton, on récupère le bouton à l'origine de l'événement
         Edition.setText(lj.getJoueur(Integer.parseInt(jb.getName())).toString()); //On affiche les informations du joueur correspondant dans la JTextArea Edition
