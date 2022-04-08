@@ -32,6 +32,17 @@ public class Transfert extends Action {
     }
     
     public int execute() { 
-        //A compléter
+        int res=-1;
+        if(this.fp != null){
+            this.cartesTransferees = this.cible.getPaquet().retirePersosFamille(this.fp);
+            this.getJ().getPaquet().ajoutePersos(cartesTransferees);
+            this.setDeroulement(this.getJ().getPseudo()+" a récupéré les cartes de la famille "+fp+" de "+this.cible.getPseudo());
+            if(this.cartesTransferees.getTaille() == 0){
+                res = 0;
+            }
+            else
+                res = this.cartesTransferees.getTaille();
+        }
+        return res;
     }
 }
