@@ -1,7 +1,10 @@
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -28,11 +31,11 @@ public class TransfertDlg extends javax.swing.JDialog {
         //La boîte de dialogue doit renvoyer les nouveaux paquets des joueurs qui ont été modifiés, le booléen 
         this.lj = lj; //ensemble des joueurs de la partie
         this.indj = indj ; //indice du joueur courant
-        // this.tc=null;
+        this.tc=null;
         this.ok=false; //booléen pour savoir si il y a eu un transfert de cartes
         this.fs=null;
         initCombo(); // méthode pour remplir la liste déroulante
-        this.indjs = 0; //indice du joueur sélectionné dans la JComboBox
+        this.indjs = -1; //indice du joueur sélectionné dans la JComboBox
         Message1.setText("Le joueur "+lj.getJoueur(indj).getPseudo()+" a obtenu une famille complète");
         Infos.setText("Personnages de "+lj.getJoueur(indj).getPseudo()+" : \n"+lj.getJoueur(indj).getPaquet());
     }
@@ -65,7 +68,7 @@ public class TransfertDlg extends javax.swing.JDialog {
     public void initPanneau(){
         PanneauG.removeAll(); //on retire tous les éléments du panneau
         this.repaint(); //on le réaffiche
-        LesPersonnages lcs = this.lj.getJoueur(indj).getPaquet(); //stockage du paquet du joueur sélectionné dans une variable
+        LesPersonnages lcs = this.lj.getJoueur(indjs).getPaquet(); //stockage du paquet du joueur sélectionné dans une variable
         int t = lcs.getTaille(); //nombre de personnages dans le paquet
         int n = 1+(t-1)/4; //nombre de colonnes pour les boutons à afficher
         PanneauG.setLayout(new java.awt.GridLayout(4,n)); //on applique le Layout correspondant au panneau
@@ -85,10 +88,10 @@ public class TransfertDlg extends javax.swing.JDialog {
     
     //Evenement exécuté en cas de clic sur un bouton du panneau
     private void boutonActionPerformed(ActionEvent evt){
-        LesPersonnages lp = lj.getJoueur(indjs).getPaquet(); //récupération du paquet du joueur sélectionné
+        LesPersonnages lp = this.lj.getJoueur(indjs).getPaquet(); //récupération du paquet du joueur sélectionné
         int t = lp.getTaille(); //nombre de personnages du paquet
         JButton bt=(JButton) evt.getSource(); //récupération du bouton où l'événement a eu lieu
-        fs = bt.getName(); // la propriété Name, contient ici le nom du personnage affiché sur le bouton
+        this.fs = bt.getName(); // la propriété Name, contient ici le nom du personnage affiché sur le bouton
         for(int i = 0; i < t; i++) {
             JButton b = (JButton)(PanneauG.getComponent(i)); //récupération du ième bouton du panneau
             //si le nom du bouton correspond à la famille c'est-à-dire au nom du bouton sélectionné
@@ -110,6 +113,29 @@ public class TransfertDlg extends javax.swing.JDialog {
         for(int i =0; i<lcs.getTaille();i++){ 
             JButton b = (JButton)PanneauG.getComponent(i); //récupération du ième bouton du panneau
             lcs.getPerso(i).setImgBouton(b); //on lui applique la photo du personnage correspondant
+        }
+    }
+    
+    //Permet de créer dans le panneau passé en paramètre autant de boutons qu'il y a dans l'instance LesPersonnages passée en paramètre
+    public void creePanneau(JPanel jp, LesPersonnages lc){
+        jp.removeAll(); //on retire tous les éléments du panneau
+        jp.repaint(); //on le réaffiche
+        int t = lc.getTaille();
+        int n = 1+(t-1)/4;
+        jp.setLayout(new java.awt.GridLayout(4,n));
+        for(int i = 0; i < t; i++){
+            JButton b = new JButton(); //création d'un bouton
+            jp.add(b);
+        }
+        this.pack();
+    }
+    
+    //Permet d'afficher les photos des personnages du paquet passé en paramètre sur les boutons du panneau passé en paramètre
+    public void dessinePanneau(JPanel jc, LesPersonnages lc){
+        int t = lc.getTaille();
+        for(int i = 0; i < t; i++){
+            JButton b = (JButton) jc.getComponent(i);
+            lc.getPerso(i).setImgBouton(b);
         }
     }
 
@@ -151,10 +177,10 @@ public class TransfertDlg extends javax.swing.JDialog {
         Message1.setText("jLabel1");
         jPanel2.add(Message1);
 
-        jLabel2.setText("jLabel1");
+        jLabel2.setText("Il peut prendre toutes les cartes d'une même famille d'un joueur");
         jPanel2.add(jLabel2);
 
-        jLabel3.setText("jLabel1");
+        jLabel3.setText("Sélectionnez le joueur dont vous voulez voir les cartes");
         jPanel2.add(jLabel3);
 
         ComboJoueurs.addActionListener(new java.awt.event.ActionListener() {
@@ -177,6 +203,11 @@ public class TransfertDlg extends javax.swing.JDialog {
         jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
         Transfert.setText("Transfert");
+        Transfert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TransfertActionPerformed(evt);
+            }
+        });
         jPanel4.add(Transfert);
 
         Fermer.setText("Fermer");
@@ -220,6 +251,34 @@ public class TransfertDlg extends javax.swing.JDialog {
         this.setVisible(false);
         this.dispose(); 
     }//GEN-LAST:event_FermerActionPerformed
+
+    private void TransfertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransfertActionPerformed
+        //On vérifie si il y a un joueur sélectionné et si ce n'est pas le joueur courant
+        if(indjs != -1 && indj != indjs){
+            //Stockage dans des attributs
+            Joueur j = this.lj.getJoueur(indj);
+            Joueur cible = this.lj.getJoueur(indjs);
+            //On vérifie si la famille sélectionnée n'est pas nulle
+            if(fs != null){
+                Transfert tc = new Transfert(j, cible, fs); //création d'une instance de transfert
+                int res = tc.execute(); //on exécute l'action de transfert de cartes sur les deux joueurs
+                if(res > 0){ //si il y a eu un transfert de cartes
+                    LesPersonnages cartes = tc.getCartesTransferees(); //récupération des cartes transférées
+                    //on dessine le panneau à droite avec les cartes transférées
+                    creePanneau(PanneauD, cartes);
+                    dessinePanneau(PanneauD, cartes);
+                    //on redessine le panneau de gauche avec le nouveau paquet du joueur ciblé
+                    LesPersonnages nvpaquet = cible.getPaquet();
+                    creePanneau(PanneauG, nvpaquet);
+                    dessinePanneau(PanneauG, nvpaquet);
+                    this.ok = true; //le booléen est égal à true ce qui signifie qu'il y a bien eu un transfert de cartes
+                    Transfert.setEnabled(false); //désactivation du bouton Transfert
+                }
+            }
+            else
+                Infos.setText("Veuillez sélectionner un joueur possédant au moins une carte");
+        }
+    }//GEN-LAST:event_TransfertActionPerformed
 
     /**
      * @param args the command line arguments

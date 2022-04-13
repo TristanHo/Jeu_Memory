@@ -278,7 +278,7 @@ public class JeuMemory extends javax.swing.JFrame {
     }//GEN-LAST:event_OptionsActionPerformed
 
     private void CartesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartesActionPerformed
-        Joueur j=new Joueur("FanMemory", "commun"); //création d'un joueur test
+        Joueur j=new Joueur("FanMemory", "communs"); //création d'un joueur test
         j.initPaquetTest(); //on lui affecte un paquet test
         VisuPersonnagesDlg vpd = new VisuPersonnagesDlg(this,true,j); //appel du constructeur de la JDialog
         vpd.setVisible(true); //affichage de la JDialog
@@ -334,15 +334,15 @@ public class JeuMemory extends javax.swing.JFrame {
     }//GEN-LAST:event_DemarrerActionPerformed
 
     private void Transfert_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Transfert_TestActionPerformed
-        Joueur j1=new Joueur("FanMemory0", "commun");
+        Joueur j1=new Joueur("FanMemory0", "communs");
         j1.initPaquetTest();
-        Joueur j2=new Joueur("FanMemory1", "commun");
+        Joueur j2=new Joueur("FanMemory1", "communs");
         j2.getPaquet().ajoutePerso(new Personnage("epiques", "burnout", 20));
         j2.getPaquet().ajoutePerso(new Personnage("epiques", "funk-ops", 30));
         j2.getPaquet().ajoutePerso(new Personnage("alpins-femmes", "mogul-master", 10));
         this.joueurs.ajouteJoueur(j1);
         this.joueurs.ajouteJoueur(j2);
-        TransfertDlg diag = new TransfertDlg(this,true,joueurs,0 );
+        TransfertDlg diag = new TransfertDlg(this,true,joueurs,0);
         diag.setVisible(true);
     }//GEN-LAST:event_Transfert_TestActionPerformed
 

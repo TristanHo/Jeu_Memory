@@ -54,12 +54,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel1"/>
+                <Property name="text" type="java.lang.String" value="Il peut prendre toutes les cartes d&apos;une m&#xea;me famille d&apos;un joueur"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel1"/>
+                <Property name="text" type="java.lang.String" value="S&#xe9;lectionnez le joueur dont vous voulez voir les cartes"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="ComboJoueurs">
@@ -117,6 +117,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Transfert"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TransfertActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="Fermer">
                   <Properties>
