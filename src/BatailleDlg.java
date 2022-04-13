@@ -200,8 +200,8 @@ public class BatailleDlg extends javax.swing.JDialog {
             //Si les 2 joueurs ont encore des cartes
             if(pj.getTaille()>0 && pa.getTaille()>0)
             {
-                infosCarte1.append("\n"+pj.toString());
-                infosCarte2.append("\n"+pa.toString());
+                infosCarte1.append("\n"+"Le joueur "+j.getPseudo()+" joue la carte "+j.getPaquet().getPerso(0));
+                infosCarte2.append("\n"+"Le joueur "+adversaire.getPseudo()+" joue la carte "+adversaire.getPaquet().getPerso(0));
                 
                 //Affihage de la photo du premier personnage de chaque joueur sur les 
                 pj.getPerso(0).setImgBouton(Carte1);
@@ -210,34 +210,37 @@ public class BatailleDlg extends javax.swing.JDialog {
                 int res=this.b.execute();
                 this.ok=true;
                 
-                infosCarte1.append("\n"+b.getDeroulement());
-                infosCarte2.append("\n"+b.getDeroulement());
                 infosCarte1.append("\n"+pj.toString());
                 infosCarte2.append("\n"+pa.toString());
                 
-                if(res==1){
+                if(res==0)
+                {
+                    Vainqueur.setText("Egalité");
+                }
+                else if(res==1){
                     Vainqueur.setText(j.getPseudo());
                 }
                 else if(res==2)
                 {
                     Vainqueur.setText(this.adversaire.getPseudo());
                 }
-                else if(res==0)
+               
+                
+                if(pj.getTaille()==0)
                 {
-                    Vainqueur.setText("Egalité");
+                    Vainqueur.setText("Vainqueur final : "+this.adversaire.getPseudo());
                 }
-                else
-                {
-                    if(pj.getTaille()==0)
-                    {
-                        Vainqueur.setText("Vainqueur final : "+this.adversaire.getPseudo());
-                    }
-                    else{
-                        Vainqueur.setText("Vainqueur final : "+j.getPseudo());
-                    }
+                else if (pa.getTaille()==0){
+                    Vainqueur.setText("Vainqueur final : "+adversaire.getPseudo());
                 }
+                else{
+                this.Demarrer.setEnabled(false);
+                Demarrer.setText("Fermer");
+                }
+            
                 
             }
+            
             
             infosCarte1.append("\n\n"+j.getPaquet().getTaille()+" / "+adversaire.getPaquet().getTaille());
         }
