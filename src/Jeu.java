@@ -11,26 +11,34 @@ import javax.swing.Action;
  * @author unknown
  */
 public class Jeu {
-    private LesPersonnages persos;
-    private LesJoueurs joueurs;
+    private LesPersonnages lesPers;
+    private LesJoueurs lesJ;
     private PlateauJeu monP;
     private Action act;
-    private int indice; //Indice du joueur courant
+    private int indC; //Indice du joueur courant
 
-    public LesPersonnages getPersos() {
-        return persos;
+    public LesPersonnages getLesPers() {
+        return lesPers;
     }
 
-    public void setPersos(LesPersonnages persos) {
-        this.persos = persos;
+    public void setLesPers(LesPersonnages lesPers) {
+        this.lesPers = lesPers;
     }
 
-    public LesJoueurs getJoueurs() {
-        return joueurs;
+    public LesJoueurs getLesJ() {
+        return lesJ;
     }
 
-    public void setJoueurs(LesJoueurs joueurs) {
-        this.joueurs = joueurs;
+    public void setLesJ(LesJoueurs lesJ) {
+        this.lesJ = lesJ;
+    }
+
+    public int getIndC() {
+        return indC;
+    }
+
+    public void setIndC(int indC) {
+        this.indC = indC;
     }
 
     public PlateauJeu getMonP() {
@@ -48,28 +56,74 @@ public class Jeu {
     public void setAct(Action act) {
         this.act = act;
     }
-
-    public int getIndice() {
-        return indice;
-    }
-
-    public void setIndice(int indice) {
-        this.indice = indice;
-    }
     
-   public Jeu(LesJoueurs lj,LesPersonnages lp,int i)
+   public Jeu(LesPersonnages lp, LesJoueurs lj, int nbc)
    {
-       setJoueurs(lj);
-       setPersos(lp);
-       setIndice(i);
-       monP = new PlateauJeu(i);       
+       this.lesPers=lp;
+       this.monP=new PlateauJeu(nbc);
+       this.lesJ=lj;
+       this.act=null;
+       this.indC=0;       
    }
    
-   public int traiteTour(Joueur jc,int index)
+   public int traiterTour(Joueur jo, int s) 
    {
-       //
-       return 0;
+       int bonus =-1;
+       Personnage pers = this.lesPers.getPerso(s);
+       jo.ajoutePersoPaquet(pers);
+       
+       String f = pers.getFamille();
+       int npf = this.lesPers.getPersosFamille(f).getTaille();
+       
+       int npj =jo.getPaquet().getPersosFamille(f).getTaille();
+       
+       //Si le joueur a une famille complète
+       if(npf==npj){
+           //Si cette famille est la famille préférée du joueur
+           if(jo.getFamillePref().equals(f)){
+               bonus=0;
+               //le jeu se termine (appel de la méthode « termineJeu() », du plateau de jeu)
+               this.monP.termineJeu();
+           }
+       }
+       else{
+           
+           //On parcourt les joueurs pour savoir s'il reste des cartes
+            
+           int nbrCartes=0;
+           
+           for (int i = 0; i < lesJ.getNbJoueurs(); i++) {
+                nbrCartes +=lesJ.getJoueur(i).getPaquet().getTaille();
+           }
+           //Si les autres joueurs ont des cartes
+
+           if(nbrCartes!=0){
+               if(f.equals("rares") || f.equals("communs")){
+                   bonus=1;
+               }
+               else{
+                   if(f.equals("legendaires") || f.equals("epiques")){
+                   bonus=2;
+                   }
+                   else{
+                       bonus=3;// cas du combat
+                   }
+               }
+           }
+       }
+       
+       return bonus;
    }
+    public int getIndSuivant(int j){ return (j+1)%lesJ.getNbJoueurs(); }
+    public Joueur getJoueurCourant(){return lesJ.getJoueur(indC);}
+    public Joueur getJoueurSuivant(int j){ return lesJ.getJoueur(getIndSuivant(j)); }
+    public boolean finJeu() { return monP.jeuVide();}
     
-    
+    public int nbPers(){
+    int n = 0;
+    for(int i = 0; i < lesJ.getNbJoueurs(); i++)
+    if (i !=this.indC) n+=lesJ.getJoueur(i).getPaquet().getTaille();
+    return n;
+    }
+
 }

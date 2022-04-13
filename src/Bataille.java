@@ -34,10 +34,12 @@ public class Bataille extends Action{
                 this.getAdversaire().getPaquet().ajoutePerso(c2);
             }
             else
-            {
+            {//Si la valeur de c1 est supérieure à celle de c2
                 if(c1.getValeur() > c2.getValeur())
                 {
-                    res=1;
+                    res=1;//Le résultat est affecté à 1
+                    /*Les deux cartes sont ajoutées au joueur courant (les ajouts sont faits par défaut en
+fin                 de liste, ce qui simule le fait de mettre une carte en dessous du paquet)*/
                     this.getJ().getPaquet().ajoutePerso(c1);
                     this.getJ().getPaquet().ajoutePerso(c2); 
                 }
@@ -48,15 +50,16 @@ public class Bataille extends Action{
                     this.getAdversaire().getPaquet().ajoutePerso(c2);
                     
                 }
-                if(this.getJ().getPaquet().getTaille()==0)
-                {
-                    this.setDeroulement(this.getJ().getPseudo()+" a joué contre "+ this.getAdversaire().getPseudo()+".\n"+this.getAdversaire().getPseudo()+" a gagné");
+            }
+            
+            if(this.getJ().getPaquet().getTaille()==0)
+            {
+                this.setDeroulement(this.getJ().getPseudo()+" a joué contre "+ this.getAdversaire().getPseudo()+".\n"+this.getAdversaire().getPseudo()+" a gagné");
 
-                }
-                else if(this.getAdversaire().getPaquet().getTaille()==0)
-                {
-                    this.setDeroulement(this.getJ().getPseudo()+" a joué contre "+ this.getAdversaire().getPseudo()+".\n"+this.getJ().getPseudo()+" a gagné");
-                }
+            }
+            else if(this.getAdversaire().getPaquet().getTaille()==0)
+            {
+                this.setDeroulement(this.getJ().getPseudo()+" a joué contre "+ this.getAdversaire().getPseudo()+".\n"+this.getJ().getPseudo()+" a gagné");
             }
             
         }

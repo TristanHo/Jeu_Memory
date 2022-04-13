@@ -82,6 +82,9 @@ public class BatailleDlg extends javax.swing.JDialog {
         Annuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1000, 700));
+        setMinimumSize(new java.awt.Dimension(1000, 700));
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 2));
 

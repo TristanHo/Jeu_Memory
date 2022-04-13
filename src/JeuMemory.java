@@ -273,7 +273,7 @@ public class JeuMemory extends javax.swing.JFrame {
             this.joueurs.ajouteJoueurs(od.getJoueurs()); //on ajoute à la liste des joueurs de JeuMemory ceux créés dans la JDialog
             int niveau = od.getNiveau(); //on récupère le niveau sélectionnée et renvoyée dans la JDialog
             this.persos = new LesPersonnages(niveau); //on construit un paquet de personnages correspondant au niveau sélectionné grâce au constructeur prenant comme paramètre en entier
-            this.monJeu = new Jeu(this.joueurs,this.persos,niveau);
+            this.monJeu = new Jeu(this.persos,this.joueurs,niveau);
         }
     }//GEN-LAST:event_OptionsActionPerformed
 
@@ -315,7 +315,7 @@ public class JeuMemory extends javax.swing.JFrame {
             PlateauJeu p = monJeu.getMonP(); //On récupére le plateau, ce qui va rendre le code plus lisible
             NbPersosR.setText("Nombre de personnages restants: "+p.getNbp());//Mettre les personnages restants à jour
             NbPersosT.setText("Nombre de personnages trouvés: "+(this.persos.getTaille()- p.getNbp()));//Mettre les personnages trouvés à jour
-            JC.setText("C'est à "+this.joueurs.getJoueur(this.monJeu.getIndice()).getPseudo()+" de jouer");//Mettre le joueur courant à jour
+            JC.setText("C'est à "+this.joueurs.getJoueur(this.monJeu.getIndC()).getPseudo()+" de jouer");//Mettre le joueur courant à jour
             
             //créer des boutons et les abonner à un écouteur de type « ActionListener » 
             //et donner un numéro à chaque bouton dans la propriété « Name »
@@ -353,7 +353,7 @@ public class JeuMemory extends javax.swing.JFrame {
         this.joueurs.getJoueur(1).getPaquet().ajoutePerso(new Personnage("epiques", "funk-ops", 30));
        // ouverture de la boîte de dialogue, avec le 1er joueur en joueur courant.
         BatailleDlg diag = new BatailleDlg(this, true, this.joueurs, 0);
-        diag.setSize(1000,600);
+        diag.setSize(1000,700);
         diag.setVisible(true);
     }//GEN-LAST:event_Bataille_TestActionPerformed
 
@@ -396,7 +396,7 @@ public class JeuMemory extends javax.swing.JFrame {
     public void verifPersos(){
         
         PlateauJeu p = this.monJeu.getMonP(); //On récupére le plateau, ce qui va rendre le code plus lisible
-        Joueur j = this.joueurs.getJoueur(monJeu.getIndice()); //on récupére le joueur courant
+        Joueur j = this.joueurs.getJoueur(monJeu.getIndC()); //on récupére le joueur courant
         
         JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l1-1)+c1);//le premier bouton cliqué
         JButton bt2 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l2-1)+c2);//le deuxième bouton cliqué
@@ -405,7 +405,7 @@ public class JeuMemory extends javax.swing.JFrame {
         {
             String fam = this.persos.getPerso(p.getCase(l1, c1)).getFamille();//Récupération de la famille de ces personnages
             
-            int bonus = traiteTour(j,p.getCase(l1, c1));//Traitement du tour de jeu avec un appel à la méthode « traiteTour » de la classe « Jeu »
+            int bonus = this.monJeu.traiterTour(j,p.getCase(l1, c1));//Traitement du tour de jeu avec un appel à la méthode « traiteTour » de la classe « Jeu »
 
             //Si le « bonus » est >= 0
             if(bonus>=0){
@@ -427,7 +427,7 @@ public class JeuMemory extends javax.swing.JFrame {
                 if(bonus==1)
                 {
                     Edition.append("\nUn transfert doit être réalisé");
-                    TransfertDlg transfert = new TransfertDlg(this,true,this.joueurs,monJeu.getIndice());
+                    TransfertDlg transfert = new TransfertDlg(this,true,this.joueurs,monJeu.getIndC());
                     transfert.setVisible(true);
                     if(transfert.getOk())
                     {
@@ -448,7 +448,7 @@ public class JeuMemory extends javax.swing.JFrame {
             
                 bonus=-1;//Réinitialisation de la valeur du bonus à -1.
 
-                j = joueurs.getJoueur(monJeu.getIndSuivant(monJeu.getIndice()));//Le joueur courant change et est fixé au joueur suivant
+                j = joueurs.getJoueur(monJeu.getIndSuivant(monJeu.getIndC()));//Le joueur courant change et est fixé au joueur suivant
             
             }
             
@@ -465,7 +465,7 @@ public class JeuMemory extends javax.swing.JFrame {
             //suivant en donnant son pseudo.
             else
             {
-                Edition.append("\nC'est le tour de "+joueurs.getJoueur(this.monJeu.getIndSuivant()));//Joueur Suivant pseudo
+                Edition.append("\nC'est le tour de "+joueurs.getJoueur(this.monJeu.getIndSuivant(l1)));//Joueur Suivant pseudo
             }
             
             //Le nombre de personnages trouvés et restants est mis à jour.
