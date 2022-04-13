@@ -56,17 +56,18 @@ public class LesPersonnages {
         return lp;
     }
     
-    public ArrayList<String> getFamilles()
-    {   ArrayList<String> lst = new ArrayList<String>();
-        for (int j=0; j<this.persos.size(); j++)
-        {   
-            Personnage p = this.persos.get(j);
+    //Récupérer dans une liste l'ensemble des familles d'un paquet
+    public ArrayList<String> getFamilles(){   
+        ArrayList<String> lst = new ArrayList<String>(); //création d'une nouvelle ArrayList contenant des éléments type String
+        for (int j=0; j<this.persos.size(); j++){   
+            Personnage p = this.persos.get(j); //On récupère le personnage d'indice j dans le paquet
             boolean trouve = false;
+            //On vérifie si il y a déjà la famille de ce personnage dans la liste
             for (int i=0; i< lst.size(); i++)
                 if (lst.get(i).equals(p.getFamille()))
                     trouve = true;
                 if (!trouve) 
-                    lst.add(p.getFamille());
+                    lst.add(p.getFamille()); //Si ce n'est pas le cas, on peut ajouter cette famille à la liste
         }
         return lst; 
     }

@@ -64,11 +64,7 @@ public class Personnage {
     public void setPhoto(Image photo) {
         this.photo = photo;
     }
-    
-    public void setPhoto(String n){
-        this.photo = new ImageIcon(getClass().getResource("/img/"+n+".jpg")).getImage();
-    }
-    
+
     public String toString(){
         String s = "";
         s = this.nom+" de la famille "+this.famille+", valeur: "+this.valeur;
