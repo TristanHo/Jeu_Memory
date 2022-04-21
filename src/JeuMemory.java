@@ -431,7 +431,7 @@ public class JeuMemory extends javax.swing.JFrame {
                     transfert.setVisible(true);
                     if(transfert.getOk())
                     {
-                        Edition.append(transfert.getTransfert().getDeroulement());
+                        Edition.append(transfert.getTc().getDeroulement());
                     }
                 }
                 //Si le bonus = 2, une bataille doit être réalisée. La boite de dialogue « BatailleDlg » est ouverte, puis un message indique dans la zone d’édition le résultat de la bataille. 
