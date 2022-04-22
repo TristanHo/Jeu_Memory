@@ -118,7 +118,9 @@ public class BatailleDlg extends javax.swing.JDialog {
         jPanel3.setLayout(new java.awt.GridLayout(1, 4));
 
         infosCarte1.setColumns(20);
+        infosCarte1.setLineWrap(true);
         infosCarte1.setRows(5);
+        infosCarte1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(infosCarte1);
 
         jPanel3.add(jScrollPane1);
@@ -130,7 +132,9 @@ public class BatailleDlg extends javax.swing.JDialog {
         jPanel3.add(Carte2);
 
         infosCarte2.setColumns(20);
+        infosCarte2.setLineWrap(true);
         infosCarte2.setRows(5);
+        infosCarte2.setWrapStyleWord(true);
         Ic2.setViewportView(infosCarte2);
 
         jPanel3.add(Ic2);
@@ -143,6 +147,7 @@ public class BatailleDlg extends javax.swing.JDialog {
 
         Vainqueur.setText("Vainqueur");
         jPanel4.add(Vainqueur);
+        Vainqueur.getAccessibleContext().setAccessibleDescription("");
 
         Demarrer.setText("Démarrer");
         Demarrer.addActionListener(new java.awt.event.ActionListener() {
@@ -232,17 +237,12 @@ public class BatailleDlg extends javax.swing.JDialog {
                 }
                 else if (pa.getTaille()==0){
                     Vainqueur.setText("Vainqueur final : "+adversaire.getPseudo());
-                }
-                else{
-                this.Demarrer.setEnabled(false);
-                Demarrer.setText("Fermer");
-                }
-            
-                
+                }   
             }
-            
-            
-            infosCarte1.append("\n\n"+j.getPaquet().getTaille()+" / "+adversaire.getPaquet().getTaille());
+            else{
+                this.Demarrer.setEnabled(false);
+                Annuler.setText("Fermer");
+                }
         }
     }//GEN-LAST:event_DemarrerActionPerformed
 

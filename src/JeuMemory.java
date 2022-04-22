@@ -442,7 +442,19 @@ public class JeuMemory extends javax.swing.JFrame {
                     bataille.setVisible(true);
                     if(bataille.isOk())
                     {
-                        Edition.append("\nLe vainqueur de la bataille est : "+bataille.Vainqueur.getText());//Afficher le résulat de la bataille
+                        int res=bataille.getBataille().execute();
+                            if(res==0)
+                    {
+                        Edition.append("\n Vainqueur Bataille : Egalité");//Afficher le résulat de la bataille
+                    }
+                    else if(res==1){
+                        Edition.append("\n Vainqueur Bataille : "+j.getPseudo());//Afficher le résulat de la bataille
+                    }
+                    else if(res==2)
+                    {
+                         Edition.append("\n Vainqueur Bataille : "+bataille.getBataille().getAdversaire().getPseudo());//Afficher le résulat de la bataille
+                    }
+                        
                     }
                 }
             

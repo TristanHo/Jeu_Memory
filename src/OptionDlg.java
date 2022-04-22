@@ -164,7 +164,7 @@ public class OptionDlg extends javax.swing.JDialog {
         });
         jPanel4.add(CaseJean);
 
-        CaseAmadeus.setText("Amadeus");
+        CaseAmadeus.setText("Mozart");
         CaseAmadeus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CaseAmadeusActionPerformed(evt);
