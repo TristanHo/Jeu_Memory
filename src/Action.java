@@ -8,11 +8,13 @@
  * @author unknown
  */
 public abstract class Action {
-	//attributs
-	private Joueur j;
-	private String descriptif;
-	private String deroulement;
-
+    
+    //attributs
+    private Joueur j;
+    private String descriptif;
+    private String deroulement;
+    
+    //accesseurs des attributs
     public Joueur getJ() {
         return j;
     }
@@ -36,22 +38,29 @@ public abstract class Action {
     public void setDeroulement(String deroulement) {
         this.deroulement = deroulement;
     }
-	public Action(){
-		this.j = null;
-                this.descriptif ="";
-                this.deroulement="";
-        }
-	public Action(Joueur jc, String d){
-		this.j = jc ; 
-                this.descriptif = d;
-                this.deroulement="";}
-	//getter,setter des attributs
-	public String toString(){
-		String s ="";
-		s+= "Action effectuée par"+this.j.getPseudo() + "\n";
-		s+= "Descriptif : "+this.descriptif+"\n";
-		s+="Deroulement : "+this.deroulement+"\n";
-		return s;}
-	public abstract int execute();
+    
+    //Constructeur par défaut
+    public Action(){
+            this.j = null;
+            this.descriptif ="";
+            this.deroulement="";
+    }
+    
+    //Constructeur avec deux paramètres : joueur et descriptif de l'action
+    public Action(Joueur jc, String d){
+            this.j = jc ; 
+            this.descriptif = d;
+            this.deroulement="";}
+
+    
+    public String toString(){
+            String s ="";
+            s+= "Action effectuée par"+this.j.getPseudo() + "\n";
+            s+= "Descriptif : "+this.descriptif+"\n";
+            s+="Deroulement : "+this.deroulement+"\n";
+            return s;}
+    
+    //Méthode abstraite execute (le corps de cette méthode est remplie dans les autres classes)
+    public abstract int execute();
 }//fin de la classe
 
