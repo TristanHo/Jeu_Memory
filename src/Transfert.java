@@ -31,7 +31,7 @@ public class Transfert extends Action {
         this.cartesTransferees = new LesPersonnages();
     }
     
-    //Gère le transfert de cartes de la bataille entre deux joueurs
+    //Gère le transfert de cartes entre deux joueurs
     public int execute() { 
         int res=0;
         if(this.fp != null){ //on vérifie qu'il y a bien une famille sélectionnée, c'est-à-dire une carte sélectionnée
