@@ -381,7 +381,7 @@ public class JeuMemory extends javax.swing.JFrame {
         JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l1)+c1);//le premier bouton cliqué
         JButton bt2 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l2)+c2);//le deuxième bouton cliqué
                 
-        if(persos.getPerso(p.getCase(l1, c1)).equals(persos.getPerso(p.getCase(l2, c2))))//Si les personnages des deux cartes sont identiques (c’est-à-dire que les valeurs contenues dans les cases du plateau sont identiques)
+        if(p.getCase(l1,c1) == p.getCase(l2, c2))//Si les personnages des deux cartes sont identiques (c’est-à-dire que les valeurs contenues dans les cases du plateau sont identiques)
         {
             String fam = this.persos.getPerso(p.getCase(l1, c1)).getFamille();//Récupération de la famille de ces personnages
             
@@ -423,24 +423,24 @@ public class JeuMemory extends javax.swing.JFrame {
                     if(bataille.isOk())
                     {
                         int res=bataille.getBataille().execute();
-                            if(res==0)
-                    {
-                        Edition.append("\n Vainqueur Bataille : Egalité");//Afficher le résulat de la bataille
-                    }
-                    else if(res==1){
-                        Edition.append("\n Vainqueur Bataille : "+j.getPseudo());//Afficher le résulat de la bataille
-                    }
-                    else if(res==2)
-                    {
-                         Edition.append("\n Vainqueur Bataille : "+bataille.getBataille().getAdversaire().getPseudo());//Afficher le résulat de la bataille
-                    }
+                        if(res==0)
+                        {
+                            Edition.append("\n Vainqueur Bataille : Egalité");//Afficher le résulat de la bataille
+                        }
+                        else if(res==1){
+                            Edition.append("\n Vainqueur Bataille : "+j.getPseudo());//Afficher le résulat de la bataille
+                        }
+                        else if(res==2)
+                        {
+                             Edition.append("\n Vainqueur Bataille : "+bataille.getBataille().getAdversaire().getPseudo());//Afficher le résulat de la bataille
+                        }
                         
                     }
                 }
             
                 bonus=-1;//Réinitialisation de la valeur du bonus à -1.
                 
-                monJeu.setIndC(monJeu.getIndSuivant(monJeu.getIndC()));//Le joueur courant change et est fixé au joueur suivant
+                j = monJeu.getJoueurSuivant(0);//Le joueur courant change et est fixé au joueur suivant
             
             }
             
@@ -457,13 +457,13 @@ public class JeuMemory extends javax.swing.JFrame {
             //suivant en donnant son pseudo.
             else
             {
-                Edition.append("\nC'est le tour de "+joueurs.getJoueur(this.monJeu.getIndSuivant(l1)));//Joueur Suivant pseudo
+                Edition.append("\nC'est le tour de "+j.getPseudo());//Joueur Suivant pseudo
             }
             
             //Le nombre de personnages trouvés et restants est mis à jour.
             NbPersosR.setText("Nombre de personnages restants: "+p.getNbp());
             NbPersosT.setText("Nombre de personnages trouvés: "+(this.persos.getTaille()- p.getNbp()));
-            
+            JC.setText("Joueur actuel : "+j.getPseudo());
 
         }
         //Si les cartes sont différentes, les photos des cartes retournées sont « effacées », le joueur

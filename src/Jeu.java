@@ -89,33 +89,32 @@ public class Jeu {
                 //le jeu se termine (appel de la méthode « termineJeu() », du plateau de jeu)
                 this.monP.termineJeu();
             }
-        }
-        else{
+            else{
 
-            //On parcourt les joueurs pour savoir s'il reste des cartes
+                //On parcourt les joueurs pour savoir s'il reste des cartes
 
-            int nbrCartes=0;
+                int nbrCartes=0;
 
-            for (int i = 0; i < lesJ.getNbJoueurs(); i++) {
-                 nbrCartes +=lesJ.getJoueur(i).getPaquet().getTaille();
-            }
-            //Si les autres joueurs ont des cartes
-
-            if(nbrCartes!=0){
-                if(f.equals("rares") || f.equals("communs")){
-                    bonus=1;
+                for (int i = 0; i < lesJ.getNbJoueurs(); i++) {
+                     nbrCartes +=lesJ.getJoueur(i).getPaquet().getTaille();
                 }
-                else{
-                    if(f.equals("legendaires") || f.equals("epiques")){
-                    bonus=2;
+                //Si les autres joueurs ont des cartes
+
+                if(nbrCartes!=0){
+                    if(f.equals("rares") || f.equals("communs")){
+                        bonus=1;
                     }
                     else{
-                        bonus=3;// cas du combat
+                        if(f.equals("legendaires") || f.equals("epiques")){
+                        bonus=2;
+                        }
+                        else{
+                            bonus=3;// cas du combat
+                        }
                     }
                 }
             }
         }
-
         return bonus;
     }
     
