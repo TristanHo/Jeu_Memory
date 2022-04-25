@@ -154,7 +154,9 @@ public class JeuMemory extends javax.swing.JFrame {
         JScrollp.setPreferredSize(new java.awt.Dimension(226, 226));
 
         Edition.setColumns(20);
+        Edition.setLineWrap(true);
         Edition.setRows(5);
+        Edition.setDragEnabled(true);
         Edition.setPreferredSize(new java.awt.Dimension(224, 227));
         JScrollp.setViewportView(Edition);
 
@@ -300,6 +302,7 @@ public class JeuMemory extends javax.swing.JFrame {
 
     private void DemarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DemarrerActionPerformed
        
+        Panneau.removeAll();//On supprime les boutons dans Panneau
         if(this.joueurs.getNbJoueurs()<2) //Si le nombre de joueurs est inférieur à 2 alors on message d'erreur est affiché dans la zone d'édition
             Edition.setText("Il n'y a pas assez de joueurs");
         else
@@ -313,9 +316,10 @@ public class JeuMemory extends javax.swing.JFrame {
             Cartes.setVisible(true);
             
             PlateauJeu p = monJeu.getMonP(); //On récupére le plateau, ce qui va rendre le code plus lisible
+            p.melange();//mélanger les cartes
             NbPersosR.setText("Nombre de personnages restants: "+p.getNbp());//Mettre les personnages restants à jour
             NbPersosT.setText("Nombre de personnages trouvés: "+(this.persos.getTaille()- p.getNbp()));//Mettre les personnages trouvés à jour
-            JC.setText("C'est à "+this.joueurs.getJoueur(this.monJeu.getIndC()).getPseudo()+" de jouer");//Mettre le joueur courant à jour
+            JC.setText("C'est à "+this.joueurs.getJoueur(this.monJeu.getIndSuivant(monJeu.getIndC())).getPseudo()+" de jouer");//Mettre le joueur courant à jour
             
             //créer des boutons et les abonner à un écouteur de type « ActionListener » 
             //et donner un numéro à chaque bouton dans la propriété « Name »
@@ -333,30 +337,6 @@ public class JeuMemory extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DemarrerActionPerformed
 
-    private void Transfert_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Transfert_TestActionPerformed
-        Joueur j1=new Joueur("FanMemory0", "communs");
-        j1.initPaquetTest();
-        Joueur j2=new Joueur("FanMemory1", "communs");
-        j2.getPaquet().ajoutePerso(new Personnage("epiques", "burnout", 20));
-        j2.getPaquet().ajoutePerso(new Personnage("epiques", "funk-ops", 30));
-        j2.getPaquet().ajoutePerso(new Personnage("alpins-femmes", "mogul-master", 10));
-        this.joueurs.ajouteJoueur(j1);
-        this.joueurs.ajouteJoueur(j2);
-        TransfertDlg diag = new TransfertDlg(this,true,joueurs,0);
-        diag.setVisible(true);
-    }//GEN-LAST:event_Transfert_TestActionPerformed
-
-    private void Bataille_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bataille_TestActionPerformed
-        // ajout de cartes aux 2 premiers joueurs
-        this.joueurs.getJoueur(0).initPaquetTest();
-        this.joueurs.getJoueur(1).getPaquet().ajoutePerso(new Personnage("epiques", "burnout", 20));
-        this.joueurs.getJoueur(1).getPaquet().ajoutePerso(new Personnage("epiques", "funk-ops", 30));
-       // ouverture de la boîte de dialogue, avec le 1er joueur en joueur courant.
-        BatailleDlg diag = new BatailleDlg(this, true, this.joueurs, 0);
-        diag.setSize(1000,700);
-        diag.setVisible(true);
-    }//GEN-LAST:event_Bataille_TestActionPerformed
-
     public void boutonActionPerformed(ActionEvent evt){
         
         JButton bt = (JButton)evt.getSource(); //récupérer le bouton cliqué
@@ -367,7 +347,7 @@ public class JeuMemory extends javax.swing.JFrame {
 
         Personnage p = this.persos.getPerso(this.monJeu.getMonP().getCase(l,c)); //récupérer le personnages
 
-        p.setImgBouton(bt);//Mettre l'image u personnage sur le bouton (Révéler la carte)
+        p.setImgBouton(bt);//Mettre l'image au personnage sur le bouton (Révéler la carte)
 
         if(l1==-1&& c1==-1)//Si c'est le premier choix du joueur on initialise la colonne et la ligne du bouton cliqués
         {
@@ -398,10 +378,10 @@ public class JeuMemory extends javax.swing.JFrame {
         PlateauJeu p = this.monJeu.getMonP(); //On récupére le plateau, ce qui va rendre le code plus lisible
         Joueur j = this.joueurs.getJoueur(monJeu.getIndC()); //on récupére le joueur courant
         
-        JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l1-1)+c1);//le premier bouton cliqué
-        JButton bt2 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l2-1)+c2);//le deuxième bouton cliqué
+        JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l1)+c1);//le premier bouton cliqué
+        JButton bt2 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l2)+c2);//le deuxième bouton cliqué
                 
-        if(p.getCase(l1, c1) == p.getCase(l2, c2))//Si les personnages des deux cartes sont identiques (c’est-à-dire que les valeurs contenues dans les cases du plateau sont identiques)
+        if(persos.getPerso(p.getCase(l1, c1)).equals(persos.getPerso(p.getCase(l2, c2))))//Si les personnages des deux cartes sont identiques (c’est-à-dire que les valeurs contenues dans les cases du plateau sont identiques)
         {
             String fam = this.persos.getPerso(p.getCase(l1, c1)).getFamille();//Récupération de la famille de ces personnages
             
@@ -459,8 +439,8 @@ public class JeuMemory extends javax.swing.JFrame {
                 }
             
                 bonus=-1;//Réinitialisation de la valeur du bonus à -1.
-
-                j = joueurs.getJoueur(monJeu.getIndSuivant(monJeu.getIndC()));//Le joueur courant change et est fixé au joueur suivant
+                
+                monJeu.setIndC(monJeu.getIndSuivant(monJeu.getIndC()));//Le joueur courant change et est fixé au joueur suivant
             
             }
             
@@ -471,7 +451,7 @@ public class JeuMemory extends javax.swing.JFrame {
             //classe « LesJoueurs ». 
             if(p.jeuVide())
             {
-                Edition.append("\n"+joueurs.getGagnants());
+                Edition.append("\n"+joueurs.getGagnants().toString());
             }
             //Sinon un message, ajouté dans la zone d’édition, indique qu’il s’agit du tour du joueur
             //suivant en donnant son pseudo.
@@ -501,9 +481,33 @@ public class JeuMemory extends javax.swing.JFrame {
         this.l2=-1;
         this.c2=-1;
         
-        
-        
     }
+    
+    private void Transfert_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Transfert_TestActionPerformed
+        Joueur j1=new Joueur("FanMemory0", "communs");
+        j1.initPaquetTest();
+        Joueur j2=new Joueur("FanMemory1", "communs");
+        j2.getPaquet().ajoutePerso(new Personnage("epiques", "burnout", 20));
+        j2.getPaquet().ajoutePerso(new Personnage("epiques", "funk-ops", 30));
+        j2.getPaquet().ajoutePerso(new Personnage("alpins-femmes", "mogul-master", 10));
+        this.joueurs.ajouteJoueur(j1);
+        this.joueurs.ajouteJoueur(j2);
+        TransfertDlg diag = new TransfertDlg(this,true,joueurs,0);
+        diag.setVisible(true);
+    }//GEN-LAST:event_Transfert_TestActionPerformed
+
+    private void Bataille_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bataille_TestActionPerformed
+        // ajout de cartes aux 2 premiers joueurs
+        this.joueurs.getJoueur(0).initPaquetTest();
+        this.joueurs.getJoueur(1).getPaquet().ajoutePerso(new Personnage("epiques", "burnout", 20));
+        this.joueurs.getJoueur(1).getPaquet().ajoutePerso(new Personnage("epiques", "funk-ops", 30));
+       // ouverture de la boîte de dialogue, avec le 1er joueur en joueur courant.
+        BatailleDlg diag = new BatailleDlg(this, true, this.joueurs, 0);
+        diag.setSize(1000,700);
+        diag.setVisible(true);
+    }//GEN-LAST:event_Bataille_TestActionPerformed
+
+    
 
     /**
      * @param args the command line arguments

@@ -58,7 +58,7 @@ public class LesPersonnages {
     
     //Récupérer dans une liste l'ensemble des familles d'un paquet
     public ArrayList<String> getFamilles(){   
-        ArrayList<String> lst = new ArrayList<String>(); //création d'une nouvelle ArrayList contenant des éléments type String
+        ArrayList<String> lst = new ArrayList<>(); //création d'une nouvelle ArrayList contenant des éléments type String
         for (int j=0; j<this.persos.size(); j++){   
             Personnage p = this.persos.get(j); //On récupère le personnage d'indice j dans le paquet
             boolean trouve = false;
