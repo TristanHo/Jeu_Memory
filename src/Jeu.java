@@ -93,11 +93,8 @@ public class Jeu {
 
                 //On parcourt les joueurs pour savoir s'il reste des cartes
 
-                int nbrCartes=0;
+                int nbrCartes = nbPers();
 
-                for (int i = 0; i < lesJ.getNbJoueurs(); i++) {
-                     nbrCartes +=lesJ.getJoueur(i).getPaquet().getTaille();
-                }
                 //Si les autres joueurs ont des cartes
 
                 if(nbrCartes!=0){
@@ -124,10 +121,10 @@ public class Jeu {
     public boolean finJeu() { return monP.jeuVide();}
     
     public int nbPers(){
-    int n = 0;
-    for(int i = 0; i < lesJ.getNbJoueurs(); i++)
-    if (i !=this.indC) n+=lesJ.getJoueur(i).getPaquet().getTaille();
-    return n;
+        int n = 0;
+        for(int i = 0; i < lesJ.getNbJoueurs(); i++)
+        if (i !=this.indC) n+=lesJ.getJoueur(i).getPaquet().getTaille();
+        return n;
     }
 
 }

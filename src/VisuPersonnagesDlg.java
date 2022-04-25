@@ -41,7 +41,12 @@ public class VisuPersonnagesDlg extends javax.swing.JDialog {
     //Stratégie du panneau et ajout des boutons pour afficher les photos
     public void initPanneau(){
         int taille = this.joueur.getPaquet().getTaille(); //récupération de la taille du paquet du joueur
-        trombinoscope.setLayout(new GridLayout(taille-1,taille-1)); //application au JPanel trombinoscope d'une stratégie GridLayout en fonction du nombre de cartes du joueur
+        if(taille <=1){
+            trombinoscope.setLayout(new GridLayout(1,1));
+        }
+        else{
+            trombinoscope.setLayout(new GridLayout(taille-1,taille-1)); //application au JPanel trombinoscope d'une stratégie GridLayout en fonction du nombre de cartes du joueur
+        }
         for(int i=0;i<this.joueur.getPaquet().getTaille();i++){
             JButton jb = new JButton(); //déclaration d'un nouveau bouton
             trombinoscope.add(jb); //on ajoute le bouton au trombinoscope

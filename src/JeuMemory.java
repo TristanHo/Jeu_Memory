@@ -154,9 +154,7 @@ public class JeuMemory extends javax.swing.JFrame {
         JScrollp.setPreferredSize(new java.awt.Dimension(226, 226));
 
         Edition.setColumns(20);
-        Edition.setLineWrap(true);
         Edition.setRows(5);
-        Edition.setDragEnabled(true);
         Edition.setPreferredSize(new java.awt.Dimension(224, 227));
         JScrollp.setViewportView(Edition);
 
@@ -171,7 +169,7 @@ public class JeuMemory extends javax.swing.JFrame {
         jPanel4.add(NbPersosR);
 
         JC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        JC.setText("C'est à Lara de jouer !");
+        JC.setText("Aucun joueur !");
         jPanel4.add(JC);
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_START);
@@ -280,9 +278,9 @@ public class JeuMemory extends javax.swing.JFrame {
     }//GEN-LAST:event_OptionsActionPerformed
 
     private void CartesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartesActionPerformed
-        Joueur j=new Joueur("FanMemory", "communs"); //création d'un joueur test
-        j.initPaquetTest(); //on lui affecte un paquet test
-        VisuPersonnagesDlg vpd = new VisuPersonnagesDlg(this,true,j); //appel du constructeur de la JDialog
+        /*Joueur j=new Joueur("FanMemory", "communs"); //création d'un joueur test
+        j.initPaquetTest(); //on lui affecte un paquet test*/
+        VisuPersonnagesDlg vpd = new VisuPersonnagesDlg(this,true,this.joueurs.getJoueur(monJeu.getIndC())); //appel du constructeur de la JDialog
         vpd.setVisible(true); //affichage de la JDialog
     }//GEN-LAST:event_CartesActionPerformed
 
@@ -319,7 +317,7 @@ public class JeuMemory extends javax.swing.JFrame {
             p.melange();//mélanger les cartes
             NbPersosR.setText("Nombre de personnages restants: "+p.getNbp());//Mettre les personnages restants à jour
             NbPersosT.setText("Nombre de personnages trouvés: "+(this.persos.getTaille()- p.getNbp()));//Mettre les personnages trouvés à jour
-            JC.setText("C'est à "+this.joueurs.getJoueur(this.monJeu.getIndSuivant(monJeu.getIndC())).getPseudo()+" de jouer");//Mettre le joueur courant à jour
+            JC.setText("C'est à "+this.joueurs.getJoueur(monJeu.getIndC()).getPseudo()+" de jouer");//Mettre le joueur courant à jour
             
             //créer des boutons et les abonner à un écouteur de type « ActionListener » 
             //et donner un numéro à chaque bouton dans la propriété « Name »
@@ -333,8 +331,8 @@ public class JeuMemory extends javax.swing.JFrame {
                 });
                 Panneau.add(bt);
             }
-            
         }
+        
     }//GEN-LAST:event_DemarrerActionPerformed
 
     public void boutonActionPerformed(ActionEvent evt){
@@ -437,12 +435,10 @@ public class JeuMemory extends javax.swing.JFrame {
                         
                     }
                 }
-            
-                bonus=-1;//Réinitialisation de la valeur du bonus à -1.
-                
-                j = monJeu.getJoueurSuivant(0);//Le joueur courant change et est fixé au joueur suivant
-            
             }
+            
+            bonus=-1;//Réinitialisation de la valeur du bonus à -1.
+            //monJeu.setIndC(monJeu.getIndSuivant(monJeu.getIndC()));//Le joueur courant change et est fixé au joueur suivant
             
             p.invalide(l1, c1, l2, c2);//Les cartes sont retirées du plateau en utilisant la méthode invalide de la classe « PlateauJeu ».
             
@@ -463,7 +459,7 @@ public class JeuMemory extends javax.swing.JFrame {
             //Le nombre de personnages trouvés et restants est mis à jour.
             NbPersosR.setText("Nombre de personnages restants: "+p.getNbp());
             NbPersosT.setText("Nombre de personnages trouvés: "+(this.persos.getTaille()- p.getNbp()));
-            JC.setText("Joueur actuel : "+j.getPseudo());
+            JC.setText("C'est à "+j.getPseudo()+" de jouer !");
 
         }
         //Si les cartes sont différentes, les photos des cartes retournées sont « effacées », le joueur
@@ -475,6 +471,7 @@ public class JeuMemory extends javax.swing.JFrame {
             bt2.setIcon(null);
             
         }
+        monJeu.setIndC(monJeu.getIndSuivant(monJeu.getIndC()));//Le joueur courant change et est fixé au joueur suivant
         //réinitialisation des valeurs des positions des cartes (l1,c1, l2, c2) à -1.
         this.l1=-1;
         this.c1=-1;
