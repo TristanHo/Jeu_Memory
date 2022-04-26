@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Aorus/Documents/Personnel/études/L1%20informatique/L1%20INFO/INFO%202B/Projet_1_avril/Hoarau_Tristan_Ismail_Saman/Jeu_Memory/src/Jeu.java</file>
-            <file>file:/C:/Users/Aorus/Documents/Personnel/études/L1%20informatique/L1%20INFO/INFO%202B/Projet_1_avril/Hoarau_Tristan_Ismail_Saman/Jeu_Memory/src/Bataille.java</file>
-            <file>file:/C:/Users/Aorus/Documents/Personnel/études/L1%20informatique/L1%20INFO/INFO%202B/Projet_1_avril/Hoarau_Tristan_Ismail_Saman/Jeu_Memory/src/BatailleDlg.java</file>
+            <file>file:/D:/L1/Cours/Info2B/Jeu_Memory/src/Joueur.java</file>
+            <file>file:/D:/L1/Cours/Info2B/Jeu_Memory/src/JeuMemory.java</file>
+            <file>file:/D:/L1/Cours/Info2B/Jeu_Memory/src/PlateauJeu.java</file>
+            <file>file:/D:/L1/Cours/Info2B/Jeu_Memory/src/LesPersonnages.java</file>
         </group>
     </open-files>
 </project-private>

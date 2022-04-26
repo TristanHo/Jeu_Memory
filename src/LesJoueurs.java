@@ -66,7 +66,7 @@ public class LesJoueurs {
     public String toString() {
         String s = "";
         for(int i =0;i<lstJ.size();i++){
-            s += "\n"+lstJ.get(i).toString();
+            s += "\n\n"+lstJ.get(i).toString();
         }
         return s;
     }

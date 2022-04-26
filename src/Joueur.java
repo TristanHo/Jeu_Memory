@@ -73,7 +73,7 @@ public class Joueur {
     public String toString(){
         return "Pseudo :"+getPseudo()+
                 "\nFamille préférée : "+getFamillePref()+
-                "\nEn possession des personnages : "+getPaquet()+
+                "\nEn possession des personnages : \n"+getPaquet()+
                 "\nScore : "+getScore();
     }
     

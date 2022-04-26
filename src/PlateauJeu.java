@@ -17,14 +17,17 @@ public class PlateauJeu {
     
     //constructeur de la classe ayant commme paramètre un entier
     public PlateauJeu(int n){ 
-       this. nbp=n;
-       this.nblig=(int)(Math.sqrt(nbp*2)) ;
-       this.nbcol=nbp*2/nblig;
-       this.tab=new int [this.nblig][this.nbcol]; //construction d'un tableau en fonction du nombre de cartes du joueur
-       initPlateauJeu(); //appel d'une méthode
+        this. nbp=n;
+        this.nbcol=(int)(Math.sqrt(nbp*2)) ;
+        this.nblig=nbp*2/nbcol;
+        this.tab=new int [this.nblig][this.nbcol];
+        initPlateauJeu();
     }
 
-    public PlateauJeu() { this(4); }
+    public PlateauJeu() 
+    {
+        this(4);
+    }
     
     //Accesseurs des attributs
     public int getNblig() { return this.nblig; }
@@ -43,7 +46,8 @@ public class PlateauJeu {
         for(int i=0; i<this.nblig; i++)
             for(int j=0; j<this.nbcol; j++)
                 tab[i][j]=(k++)%this.nbp; //on numérote de 0 jusqu'au nombre de persos les cases
-        melange();
+        
+        this.melange();
     }
     
     //Invalider les deux cases quand le joueur a trouvé les deux personnages
@@ -56,20 +60,25 @@ public class PlateauJeu {
     
     //1000 permutations de cases 2 par 2 dans le plateau
     public void melange(){
+        
+        int i1;
+        int j1;
+        int i2;
+        int j2;
         for(int i = 0; i < 1000; i++){ //on répète le mélange 1000 fois
             
             //ligne et colonne de la première case choisies aléatoirement
-            int i1 = (int)Math.random() * nblig;
-            int j1 = (int)Math.random() * nbcol;
+             i1= (int)Math.random() * nblig;
+             j1= (int)Math.random() * nbcol;
             //ligne et colonne de la seconde case choisies aléatoirement
-            int i2 = (int)Math.random() * nblig;
-            int j2 = (int)Math.random() * nbcol;
+             i2 = (int)Math.random() * nblig;
+             j2 = (int)Math.random() * nbcol;
             
             int temps = tab[i1][j1]; //On déclare une variable qui va nous servir temporairement pour faire un transfert de valeurs et pour ne pas perdre de données
             
             //On permute
             tab[i1][j1] = tab[i2][j2]; 
-            tab[i1][j2] = temps; 
+            tab[i2][j2] = temps; 
         }
     }
 
@@ -81,10 +90,7 @@ public class PlateauJeu {
     //Vérifier qu'une case est valide (contient un personnage)
     public boolean estValide(int l, int c){
         //on vérifie si la case est bien numérotée, c'est-à-dire qu'elle contient un perso
-        if(tab[l][c]>-1)
-            return true;
-        else
-            return false;
+        return tab[l][c]!=-1;
     }
 
     //Mettre fin au jeu
