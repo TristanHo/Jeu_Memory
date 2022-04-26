@@ -350,28 +350,44 @@ public class JeuMemory extends javax.swing.JFrame {
     public void boutonActionPerformed(ActionEvent evt){
         
         JButton bt = (JButton)evt.getSource(); //récupérer le bouton cliqué
-
-        int i = Integer.parseInt(bt.getName());  //récupérer l'indice du bouton 
-        int l = i/this.monJeu.getMonP().getNbcol(); //Calculer la ligne du bouton cliqué
-        int c = i%this.monJeu.getMonP().getNbcol();//Calculer la colonne du bouton cliqué
         
-        
-        Personnage p = this.persos.getPerso(this.monJeu.getMonP().getCase(l,c)); //récupérer le personnages
-        p.setImgBouton(bt);//Mettre l'image au personnage sur le bouton (Révéler la carte)
+        if(bt.getIcon()==null){
+            int i = Integer.parseInt(bt.getName());  //récupérer l'indice du bouton 
+            int l = i/this.monJeu.getMonP().getNbcol(); //Calculer la ligne du bouton cliqué
+            int c = i%this.monJeu.getMonP().getNbcol();//Calculer la colonne du bouton cliqué
 
-        if(l1==-1&& c1==-1)//Si c'est le premier choix du joueur on initialise la colonne et la ligne du bouton cliqués
+
+           
+
+            if(l1==-1&& c1==-1)//Si c'est le premier choix du joueur on initialise la colonne et la ligne du bouton cliqués
+            {
+                l1=l;
+                c1=c;
+                Personnage p = this.persos.getPerso(this.monJeu.getMonP().getCase(l1,c1)); //récupérer le personnages
+                p.setImgBouton(bt);//Mettre l'image au personnage sur le bouton (Révéler la carte)
+            }
+            else if (l2==-1&& c2==-1) {//Si c'est le deuxième choix du joueur et est différent du premier choix on initialise la colonne et la ligne du bouton cliqués
+
+                l2=l;
+                c2=c;
+                Personnage p = this.persos.getPerso(this.monJeu.getMonP().getCase(l2,c2)); //récupérer le personnages
+                p.setImgBouton(bt);//Mettre l'image au personnage sur le bouton (Révéler la carte)
+                startTimer();
+            }
+            
+        }
+        else
         {
-            l1=l;
-            c1=c;
+            if(l1!=-1 && c1!=-1){
+                JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l1)+c1);//le premier bouton cliqué
+                bt1.setIcon(null); 
+            }
+               
+            this.l1=-1;
+            this.c1=-1;
+            this.l2=-1;
+            this.c2=-1;
         }
-        else if (l2==-1&& c2==-1) {//Si c'est le deuxième choix du joueur et est différent du premier choix on initialise la colonne et la ligne du bouton cliqués
-
-            l2=l;
-            c2=c;
-            startTimer();
-        }
-        
-        
         
     }
     
@@ -393,8 +409,8 @@ public class JeuMemory extends javax.swing.JFrame {
         Joueur j = joueurs.getJoueur(monJeu.getIndC()); //on récupére le joueur courant
 
         
-        JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l1)+c1);//le premier bouton cliqué
-        JButton bt2 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l2)+c2);//le deuxième bouton cliqué
+        JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*l1+c1);//le premier bouton cliqué
+        JButton bt2 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*l2+c2);//le deuxième bouton cliqué
                 
         if(p.getCase(l1,c1) == p.getCase(l2, c2))//Si les personnages des deux cartes sont identiques (c’est-à-dire que les valeurs contenues dans les cases du plateau sont identiques)
         {
