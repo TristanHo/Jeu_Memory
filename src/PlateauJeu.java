@@ -18,8 +18,8 @@ public class PlateauJeu {
     //constructeur de la classe ayant commme paramètre un entier
     public PlateauJeu(int n){ 
         this. nbp=n;
-        this.nbcol=(int)(Math.sqrt(nbp*2)) ;
-        this.nblig=nbp*2/nbcol;
+        this.nblig=(int)(Math.sqrt(nbp*2)) ;
+        this.nbcol=nbp*2/nblig;
         this.tab=new int [this.nblig][this.nbcol];
         initPlateauJeu();
     }
@@ -60,7 +60,6 @@ public class PlateauJeu {
     
     //1000 permutations de cases 2 par 2 dans le plateau
     public void melange(){
-        
         int i1;
         int j1;
         int i2;
@@ -68,11 +67,11 @@ public class PlateauJeu {
         for(int i = 0; i < 1000; i++){ //on répète le mélange 1000 fois
             
             //ligne et colonne de la première case choisies aléatoirement
-             i1= (int)Math.random() * nblig;
-             j1= (int)Math.random() * nbcol;
+             i1= (int)(Math.random() * nblig);
+             j1= (int)(Math.random() * nbcol);
             //ligne et colonne de la seconde case choisies aléatoirement
-             i2 = (int)Math.random() * nblig;
-             j2 = (int)Math.random() * nbcol;
+             i2 = (int)(Math.random() * nblig);
+             j2 = (int)(Math.random() * nbcol);
             
             int temps = tab[i1][j1]; //On déclare une variable qui va nous servir temporairement pour faire un transfert de valeurs et pour ne pas perdre de données
             

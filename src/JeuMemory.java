@@ -322,7 +322,6 @@ public class JeuMemory extends javax.swing.JFrame {
             Cartes.setVisible(true);
             
             PlateauJeu p = monJeu.getMonP(); //On récupére le plateau, ce qui va rendre le code plus lisible
-            p.melange();//mélanger les cartes
             NbPersosR.setText("Nombre de personnages restants: "+p.getNbp());//Mettre les personnages restants à jour
             NbPersosT.setText("Nombre de personnages trouvés: "+(this.persos.getTaille()- p.getNbp()));//Mettre les personnages trouvés à jour
             JC.setText("C'est à "+joueurs.getJoueur(monJeu.getIndC()).getPseudo()+" de jouer");//Mettre le joueur courant à jour
@@ -351,38 +350,36 @@ public class JeuMemory extends javax.swing.JFrame {
         
         JButton bt = (JButton)evt.getSource(); //récupérer le bouton cliqué
         
-        if(bt.getIcon()==null){
+        if(bt.getIcon()==null){//Si la photo n'est pas dévoilée
             int i = Integer.parseInt(bt.getName());  //récupérer l'indice du bouton 
             int l = i/this.monJeu.getMonP().getNbcol(); //Calculer la ligne du bouton cliqué
             int c = i%this.monJeu.getMonP().getNbcol();//Calculer la colonne du bouton cliqué
 
 
-           
+           Personnage p = this.persos.getPerso(this.monJeu.getMonP().getCase(l,c)); //récupérer le personnages
+           p.setImgBouton(bt);//Mettre l'image au personnage sur le bouton (Révéler la carte)
 
             if(l1==-1&& c1==-1)//Si c'est le premier choix du joueur on initialise la colonne et la ligne du bouton cliqués
             {
                 l1=l;
                 c1=c;
-                Personnage p = this.persos.getPerso(this.monJeu.getMonP().getCase(l1,c1)); //récupérer le personnages
-                p.setImgBouton(bt);//Mettre l'image au personnage sur le bouton (Révéler la carte)
             }
             else if (l2==-1&& c2==-1) {//Si c'est le deuxième choix du joueur et est différent du premier choix on initialise la colonne et la ligne du bouton cliqués
 
                 l2=l;
                 c2=c;
-                Personnage p = this.persos.getPerso(this.monJeu.getMonP().getCase(l2,c2)); //récupérer le personnages
-                p.setImgBouton(bt);//Mettre l'image au personnage sur le bouton (Révéler la carte)
                 startTimer();
             }
             
         }
-        else
+        else//Cette partie n'est pas demandée dans le projet
         {
             if(l1!=-1 && c1!=-1){
-                JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l1)+c1);//le premier bouton cliqué
+                JButton bt1 = (JButton)Panneau.getComponent(monJeu.getMonP().getNbcol()*(l1)+c1);//le premier bouton cliqué est caché
                 bt1.setIcon(null); 
             }
                
+            //On met les coordonées à 0 et faire comme si rien ne s'était passé
             this.l1=-1;
             this.c1=-1;
             this.l2=-1;
