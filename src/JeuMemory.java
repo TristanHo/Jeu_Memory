@@ -401,7 +401,7 @@ public class JeuMemory extends javax.swing.JFrame {
             String fam = this.persos.getPerso(p.getCase(l1, c1)).getFamille();//Récupération de la famille de ces personnages
             
             int bonus = this.monJeu.traiterTour(j,p.getCase(l1, c1));//Traitement du tour de jeu avec un appel à la méthode « traiteTour » de la classe « Jeu »
-
+            
             //Si le « bonus » est >= 0
             if(bonus>=0)
             {

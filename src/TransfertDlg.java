@@ -33,7 +33,7 @@ public class TransfertDlg extends javax.swing.JDialog {
         this.indj = indj ; //indice du joueur courant
         this.tc=null;
         this.ok=false; //booléen pour savoir si il y a eu un transfert de cartes
-        this.fs=null;
+        this.fs = null;
         initCombo(); // méthode pour remplir la liste déroulante
         this.indjs = -1; //indice du joueur sélectionné dans la JComboBox
         Message1.setText("Le joueur "+lj.getJoueur(indj).getPseudo()+" a obtenu une famille complète");
@@ -249,7 +249,6 @@ public class TransfertDlg extends javax.swing.JDialog {
 
     private void FermerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FermerActionPerformed
         this.setVisible(false);
-        this.dispose(); 
     }//GEN-LAST:event_FermerActionPerformed
 
     private void TransfertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransfertActionPerformed
@@ -260,10 +259,10 @@ public class TransfertDlg extends javax.swing.JDialog {
             Joueur cible = this.lj.getJoueur(indjs);
             //On vérifie si la famille sélectionnée n'est pas nulle
             if(fs != null){
-                Transfert tc = new Transfert(j, cible, fs); //création d'une instance de transfert
-                int res = tc.execute(); //on exécute l'action de transfert de cartes sur les deux joueurs
+                this.tc = new Transfert(j, cible, fs); //création d'une instance de transfert
+                int res = this.tc.execute(); //on exécute l'action de transfert de cartes sur les deux joueurs
                 if(res > 0){ //si il y a eu un transfert de cartes
-                    LesPersonnages cartes = tc.getCartesTransferees(); //récupération des cartes transférées
+                    LesPersonnages cartes = this.tc.getCartesTransferees(); //récupération des cartes transférées
                     //on dessine le panneau à droite avec les cartes transférées
                     creePanneau(PanneauD, cartes);
                     dessinePanneau(PanneauD, cartes);
