@@ -269,7 +269,20 @@ public class JeuMemory extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RecommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecommencerActionPerformed
-       //TODO
+       Edition.setText("");
+       Panneau.removeAll();
+       Panneau.repaint();
+       this.joueurs = new LesJoueurs();
+       this.persos = new LesPersonnages();
+       Recommencer.setVisible(false);
+       Demarrer.setVisible(true);
+       Options.setVisible(true);
+       AjoutJoueur.setVisible(true);
+       Joueurs.setVisible(false);
+       Cartes.setVisible(false);
+       NbPersosR.setText("Nombre de personnages restants: 0");
+       NbPersosT.setText("Nombre de personnages trouvés: 0");
+       JC.setText("Aucun joueur !");
     }//GEN-LAST:event_RecommencerActionPerformed
 
     private void OptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionsActionPerformed
@@ -420,14 +433,14 @@ public class JeuMemory extends javax.swing.JFrame {
                 //Affichage de message qui indique que le joueur a gagné tous les personnages la famille « fam » dans la zone d’édition
                 Edition.append("\n"+j.getPseudo()+" a gagné tous les personnages de la famille "+fam+".");
                 
-                //Si le bonus = 0, c’est la famille préférée du joueur, le jeu se termine, un message indique le joueur gagnant, tous les boutons du jeu sont bloqués.
+                //Si le bonus = 0, c’est la famille préférée du joueur, le jeu se termine, un message indique le joueur gagnant, tous les boutons du jeu sont bloqués sauf Recommencer, Options et AjoutJoueur
                 if(bonus==0)
                 {
                     Edition.append("\n"+j.getPseudo()+" a gagné car il a gagné tous les personnages de sa famille préférée '"+j.getFamillePref()+"'.");
                     Demarrer.setVisible(false);
-                    Recommencer.setVisible(false);
-                    Options.setVisible(false);
-                    AjoutJoueur.setVisible(false);
+                    Recommencer.setVisible(true);
+                    Options.setVisible(true);
+                    AjoutJoueur.setVisible(true);
                     Joueurs.setVisible(false);
                     Cartes.setVisible(false);
                     p.termineJeu();
