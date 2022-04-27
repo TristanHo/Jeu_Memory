@@ -69,7 +69,8 @@ public class JeuMemory extends javax.swing.JFrame {
         this.l2=-1;
         this.c2=-1;
         //on initialise monJeu à null
-        this.monJeu = null;
+        this.monJeu = null; //initiliser le jeu à null
+        Recommencer.setVisible(false); //cacher le bouton Recommencer
 
     }
 
@@ -125,7 +126,6 @@ public class JeuMemory extends javax.swing.JFrame {
         Bataille_Test = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         Panneau.setLayout(new java.awt.GridLayout(4, 5));
         Panneau.add(jButton1);
@@ -269,8 +269,7 @@ public class JeuMemory extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RecommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecommencerActionPerformed
-        
-   //TODO
+       //TODO
     }//GEN-LAST:event_RecommencerActionPerformed
 
     private void OptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionsActionPerformed
