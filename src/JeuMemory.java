@@ -126,7 +126,7 @@ public class JeuMemory extends javax.swing.JFrame {
         Bataille_Test = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setMinimumSize(new java.awt.Dimension(1000, 700));
 
         Panneau.setLayout(new java.awt.GridLayout(4, 5));
         Panneau.add(jButton1);
@@ -155,6 +155,7 @@ public class JeuMemory extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(350, 336));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
+        JScrollp.setAutoscrolls(true);
         JScrollp.setPreferredSize(new java.awt.Dimension(226, 226));
 
         Edition.setEditable(false);
@@ -432,6 +433,8 @@ public class JeuMemory extends javax.swing.JFrame {
             
             int bonus = this.monJeu.traiterTour(j,p.getCase(l1, c1));//Traitement du tour de jeu avec un appel à la méthode « traiteTour » de la classe « Jeu »
             
+            p.invalide(l1, c1, l2, c2);//Les cartes sont retirées du plateau en utilisant la méthode invalide de la classe « PlateauJeu ».
+            
             //Si le « bonus » est >= 0
             if(bonus>=0)
             {
@@ -451,7 +454,7 @@ public class JeuMemory extends javax.swing.JFrame {
                     p.termineJeu();
                 }
                 //Si le bonus = 1, un transfert doit être réalisé. La boite de dialogue « TransfertDlg » est ouverte, puis un message indique dans la zone d’édition le résultat du transfert. 
-                if(bonus==1)
+                else if(bonus==1)
                 {
                     Edition.append("\nUn transfert doit être réalisé");
                     TransfertDlg transfert = new TransfertDlg(this,true,this.joueurs,monJeu.getIndC());
@@ -462,26 +465,15 @@ public class JeuMemory extends javax.swing.JFrame {
                     }
                 }
                 //Si le bonus = 2, une bataille est réalisée. La boite de dialogue « BatailleDlg » est ouverte, puis un message indique dans la zone d’édition le résultat de la bataille. 
-                if(bonus==2)
+                else if(bonus==2)
                 {
                     Edition.append("\nUne bataille va commencer");
                     BatailleDlg batailleDlg = new BatailleDlg(this,true,joueurs,0);
                     batailleDlg.setVisible(true);
                     if(batailleDlg.isOk())
                     {
-                        int res=batailleDlg.getBataille().execute();
-                        if(res==0)
-                        {
-                            Edition.append("\n Vainqueur Bataille : Egalité");//Afficher le résulat de la bataille
-                        }
-                        else if(res==1){
-                            Edition.append("\n Vainqueur Bataille : "+j.getPseudo());//Afficher le résulat de la bataille
-                        }
-                        else if(res==2)
-                        {
-                             Edition.append("\n Vainqueur Bataille : "+batailleDlg.getBataille().getAdversaire().getPseudo());//Afficher le résulat de la bataille
-                        }
-                        
+                        Edition.append("\n"+batailleDlg.getBataille().getDeroulement()); 
+                       
                     }
                 }
                 
@@ -491,7 +483,7 @@ public class JeuMemory extends javax.swing.JFrame {
             
             
             
-            p.invalide(l1, c1, l2, c2);//Les cartes sont retirées du plateau en utilisant la méthode invalide de la classe « PlateauJeu ».
+            
             
             //S’il n’y plus de cartes à retourner (le plateau de jeu est vide), un message indique le ou
             //les gagnants dans la zone d’édition en utilisant la méthode « getGagnants » de la
@@ -504,10 +496,12 @@ public class JeuMemory extends javax.swing.JFrame {
             //suivant en donnant son pseudo.
             else
             {
+                
                 monJeu.setIndC(monJeu.getIndSuivant(monJeu.getIndC()));
                 JC.setText("C'est à "+joueurs.getJoueur(monJeu.getIndC()).getPseudo()+" de jouer !"); //Mettre à jour le joueur courant
                 Edition.append("\nC'est le tour de "+joueurs.getJoueur(monJeu.getIndC()).getPseudo());//Ajouter dans la zone d'édition que c'est le tour du joueur suivant
             }
+                
             
             //Le nombre de personnages trouvés et restants est mis à jour.
             NbPersosR.setText("Nombre de personnages restants: "+p.getNbp());
@@ -522,7 +516,7 @@ public class JeuMemory extends javax.swing.JFrame {
             bt1.setIcon(null);
             bt2.setIcon(null);
             
-            
+           
             monJeu.setIndC(monJeu.getIndSuivant(monJeu.getIndC()));//Passer au joueur suivant
             JC.setText("C'est à "+joueurs.getJoueur(monJeu.getIndC()).getPseudo()+" de jouer !");//Mettre à jour le joueur courant
             Edition.append("\nC'est le tour de "+joueurs.getJoueur(monJeu.getIndC()).getPseudo());//Ajouter dans la zone d'édition que c'est le tour du joueur suivant

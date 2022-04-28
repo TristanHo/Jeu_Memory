@@ -143,8 +143,8 @@ public class LesPersonnages {
         if (nc >= 4){ // 2 familles
             ajoutePerso(new Personnage("communs", "assault-trooper", 10));
             ajoutePerso(new Personnage("communs", "commando", 20));
-            ajoutePerso(new Personnage("rares", "absolute-zero", 10));
-            ajoutePerso(new Personnage("rares", "arctice-assassin", 20));
+            ajoutePerso(new Personnage("legendaires", "absolute-zero", 10));
+            ajoutePerso(new Personnage("legendaires", "arctice-assassin", 20));
         }
         if (nc >= 10){ // 4 familles
             ajoutePerso(new Personnage("communs", "devestrator", 30));

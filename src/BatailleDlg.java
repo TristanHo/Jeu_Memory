@@ -295,9 +295,8 @@ public class BatailleDlg extends javax.swing.JDialog {
 
     //Au click sur le bouton Annuler on met ok à false et on ferme la fenétre
     private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerActionPerformed
-        this.ok=false;
-        this.setVisible(false);
-        this.dispose();
+       
+            this.setVisible(false);
     }//GEN-LAST:event_AnnulerActionPerformed
     
     /**
