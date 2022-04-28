@@ -270,17 +270,21 @@ public class JeuMemory extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RecommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecommencerActionPerformed
-       Edition.setText("");
+       //On vide la zone d'Edition et le Panneau
+        Edition.setText("");
        Panneau.removeAll();
        Panneau.repaint();
+       //On vide les listes de joueurs et de personnages
        this.joueurs = new LesJoueurs();
        this.persos = new LesPersonnages();
+       //Affichage ou non des différents boutons
        Recommencer.setVisible(false);
        Demarrer.setVisible(true);
        Options.setVisible(true);
        AjoutJoueur.setVisible(true);
        Joueurs.setVisible(false);
        Cartes.setVisible(false);
+       //Réinitialisation des JLabel
        NbPersosR.setText("Nombre de personnages restants: 0");
        NbPersosT.setText("Nombre de personnages trouvés: 0");
        JC.setText("Aucun joueur !");
