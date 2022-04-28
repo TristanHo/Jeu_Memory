@@ -70,7 +70,7 @@ public class JeuMemory extends javax.swing.JFrame {
         this.c2=-1;
         //on initialise monJeu à null
         this.monJeu = null; //initiliser le jeu à null
-        Recommencer.setVisible(false); //cacher le bouton Recommencer
+        Recommencer.setVisible(false); //cacher le 
 
     }
 
@@ -126,6 +126,7 @@ public class JeuMemory extends javax.swing.JFrame {
         Bataille_Test = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         Panneau.setLayout(new java.awt.GridLayout(4, 5));
         Panneau.add(jButton1);
@@ -553,7 +554,7 @@ public class JeuMemory extends javax.swing.JFrame {
         this.joueurs.getJoueur(1).getPaquet().ajoutePerso(new Personnage("epiques", "funk-ops", 30));
        // ouverture de la boîte de dialogue, avec le 1er joueur en joueur courant.
         BatailleDlg diag = new BatailleDlg(this, true, this.joueurs, 0);
-        diag.setSize(1000,700);
+        diag.setSize(1100,800);
         diag.setVisible(true);
     }//GEN-LAST:event_Bataille_TestActionPerformed
 
