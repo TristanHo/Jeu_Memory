@@ -39,7 +39,8 @@ public class BatailleDlg extends javax.swing.JDialog {
         this.lj=lj;
         this.ok=false;
         this.indj=jc;
-        //Modification du bouton Annuler
+        
+        //Modification du bouton Annuler et le rendre invisible
         Annuler.setText("Annuler");
         Annuler.setVisible(false);
         //Ajout de texte informatif
@@ -53,8 +54,7 @@ public class BatailleDlg extends javax.swing.JDialog {
         DefaultListModel mod = new DefaultListModel(); //création d'un modèle
         //On ajout les pseudos des joueurs à ce modèle
         for (int i = 0; i < lj.getNbJoueurs(); i++) {
-            
-            mod.addElement(lj.getJoueur(i).getPseudo());
+                mod.addElement(lj.getJoueur(i).getPseudo());
         }
         ListeJ.setModel(mod); //On applique ce modèle à la JList
         ListeJ.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Permet de n'autoriser qu'une seule sélection à la fois sur la JList
@@ -92,9 +92,7 @@ public class BatailleDlg extends javax.swing.JDialog {
         Annuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1000, 700));
-        setMinimumSize(new java.awt.Dimension(1000, 700));
-        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setMinimumSize(new java.awt.Dimension(1100, 800));
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -199,10 +197,15 @@ public class BatailleDlg extends javax.swing.JDialog {
                                                     l'indice de l'élément sélectionné dans la JList,
                                                     qui correspondra à l'adversaire*/
                 this.b=new Bataille(jc,this.adversaire); //Création d'une instance de Bataille entre le joueur courant et l'adversaire
-                //Affichage du bouton annuler et affichage d'informations par rapport aux joueurs
+                
+                //Affichage du bouton annuler
                 Annuler.setVisible(true);
+                
+                //Afficher les pseudos du joueur courant et de son adversaire dans les labels « Joueur » et « Adversaire »
                 Joueur.setText(jc.getPseudo());
                 Adversaire.setText(this.adversaire.getPseudo());
+                
+                //Afficher le contenu du paquet de chacun des joueurs dans les zones d’édition « InfosCarte1 » et «InfosCarte2».
                 infosCarte1.setText(jc.getPaquet().toString());
                 infosCarte2.setText(this.adversaire.getPaquet().toString());
             }
@@ -224,19 +227,38 @@ public class BatailleDlg extends javax.swing.JDialog {
             //Si les 2 joueurs ont encore des cartes
             if(pj.getTaille()>0 && pa.getTaille()>0)
             {
+                //Afficher le personnage joué (1er personnage du paquet du joueur), pour chaque joueur dans les zones d’édition « InfosCarte1 » et « InfosCarte2 »,
                 infosCarte1.append("\n"+"Le joueur "+j.getPseudo()+" joue la carte "+j.getPaquet().getPerso(0));
                 infosCarte2.append("\n"+"Le joueur "+adversaire.getPseudo()+" joue la carte "+adversaire.getPaquet().getPerso(0));
+                
+                //selon la valeur de retour de cette méthode, afficher le pseudo du gagnant ou du perdant (ou de l’absence de
+                //ceux-ci en cas de match nul), ainsi que l’affichage du nouveau contenu des paquets de chacun des joueurs
+                //dans les zones d’édition « InfosCarte1 » et « InfosCarte2 »
                 
                 //Affihage de la photo du premier personnage de chaque joueur sur les boutons
                 pj.getPerso(0).setImgBouton(Carte1);
                 pa.getPerso(0).setImgBouton(Carte2);
-                
-                int res=this.b.execute(); //Récupération du résultat de la bataille
                 this.ok=true; //booléen à true car la bataille a bien eu lieu
                 
+                
+                int res = this.b.execute();//appel de la méthode execute de Bataille
+
+                if(res==0){
+                    infosCarte1.append("\nEgalité");//égalité
+                    infosCarte2.append("\nEgalité");
+                }
+                else if(res==1){
+                   infosCarte1.append("\n"+j.getPseudo()+" gagne.");//Le joueur courant gagne
+                   infosCarte2.append("\n"+adversaire.getPseudo()+" perd.");
+                }
+                else if(res==2){
+                    infosCarte1.append("\n"+j.getPseudo()+" perd.");//L'adversaire gagne
+                    infosCarte2.append("\n"+adversaire.getPseudo()+" gagne.");
+                }
+                
                 //Affichage des informations des paquets des joueurs dans les zones correspondantes
-                infosCarte1.append("\n"+pj.toString());
-                infosCarte2.append("\n"+pa.toString());
+                infosCarte1.append("\n\n"+pj.toString());
+                infosCarte2.append("\n\n"+pa.toString());
                 
                 if(res==0)
                 {
@@ -254,9 +276,13 @@ public class BatailleDlg extends javax.swing.JDialog {
                 if(pj.getTaille()==0)
                 {
                     Vainqueur.setText("Vainqueur final : "+this.adversaire.getPseudo());
+                    this.Demarrer.setEnabled(false);
+                    Annuler.setText("Fermer");
                 }
                 else if (pa.getTaille()==0){
-                    Vainqueur.setText("Vainqueur final : "+adversaire.getPseudo());
+                    Vainqueur.setText("Vainqueur final : "+j.getPseudo());
+                    this.Demarrer.setEnabled(false);
+                    Annuler.setText("Fermer");
                 }   
             }
             //Si l'un des deux joueurs a un paquet vide, on désactive le bouton Démarrer et on change le bouton Annuler en Fermer

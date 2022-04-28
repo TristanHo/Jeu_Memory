@@ -62,5 +62,6 @@ public abstract class Action {
     
     //Méthode abstraite execute (le corps de cette méthode est remplie dans les autres classes)
     public abstract int execute();
+    
 }//fin de la classe
 

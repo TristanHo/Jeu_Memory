@@ -27,17 +27,19 @@ public class Bataille extends Action{
     
     //Méthode execute (définit ce qu'il se passe lors d'une action de type bataille et les transferts de carte qui en résultent)
     public int execute(){
-        int res=-1;
+       
+        int res=-1;//Initialisation de la valeur du résultat à -1, dans un entier nommé « res »
         if(this.getAdversaire().getPaquet().getTaille()>0 && this.getJ().getPaquet().getTaille()>0) //s'il reste des cartes à l'adversaire et au joueur courant
-        {   
+        {             
             //On stocke les premiers personnages des paquets de chaque joueur
             Personnage c1 = this.getJ().getPaquet().getPerso(0);
             Personnage c2 = getAdversaire().getPaquet().getPerso(0);
-            //On les retire des paquets
+            
+            //On retire le premier personnage du paquet de chaque joueur
             this.getJ().getPaquet().retirePerso(c1);
             this.getAdversaire().getPaquet().retirePerso(c2);
             
-            if(c1.getValeur()==c2.getValeur()) //Si les deux personnages ont la même valeur
+            if(c1.getValeur() == c2.getValeur()) //Si les deux personnages ont la même valeur
             {
                 res=0; //Le résultat est affecté à 0
                 //On replace les personnages dans leurs paquets respectifs

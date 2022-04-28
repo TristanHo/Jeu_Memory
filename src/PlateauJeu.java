@@ -47,7 +47,7 @@ public class PlateauJeu {
             for(int j=0; j<this.nbcol; j++)
                 tab[i][j]=(k++)%this.nbp; //on numérote de 0 jusqu'au nombre de persos les cases
         
-        this.melange();
+        //this.melange();
     }
     
     //Invalider les deux cases quand le joueur a trouvé les deux personnages
