@@ -468,7 +468,7 @@ public class JeuMemory extends javax.swing.JFrame {
                 else if(bonus==2)
                 {
                     Edition.append("\nUne bataille va commencer");
-                    BatailleDlg batailleDlg = new BatailleDlg(this,true,joueurs,0);
+                    BatailleDlg batailleDlg = new BatailleDlg(this,true,joueurs,monJeu.getIndC());
                     batailleDlg.setVisible(true);
                     if(batailleDlg.isOk())
                     {
@@ -532,7 +532,7 @@ public class JeuMemory extends javax.swing.JFrame {
     
     //Transfert_Test qui permet de tester l'action Transfert
     private void Transfert_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Transfert_TestActionPerformed
-        Joueur j1=new Joueur("FanMemory0", "communs");
+        /*Joueur j1=new Joueur("FanMemory0", "communs");
         j1.initPaquetTest();
         Joueur j2=new Joueur("FanMemory1", "communs");
         j2.getPaquet().ajoutePerso(new Personnage("epiques", "burnout", 20));
@@ -541,11 +541,12 @@ public class JeuMemory extends javax.swing.JFrame {
         this.joueurs.ajouteJoueur(j1);
         this.joueurs.ajouteJoueur(j2);
         TransfertDlg diag = new TransfertDlg(this,true,joueurs,0);
-        diag.setVisible(true);
+        diag.setVisible(true);*/
     }//GEN-LAST:event_Transfert_TestActionPerformed
 
      //Bataille_Test qui permet de tester l'action Bataille
     private void Bataille_TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bataille_TestActionPerformed
+      /*
         // ajout de cartes aux 2 premiers joueurs
         this.joueurs.getJoueur(0).initPaquetTest();
         this.joueurs.getJoueur(1).getPaquet().ajoutePerso(new Personnage("epiques", "burnout", 20));
@@ -553,7 +554,7 @@ public class JeuMemory extends javax.swing.JFrame {
        // ouverture de la boîte de dialogue, avec le 1er joueur en joueur courant.
         BatailleDlg diag = new BatailleDlg(this, true, this.joueurs, 0);
         diag.setSize(1100,800);
-        diag.setVisible(true);
+        diag.setVisible(true);*/
     }//GEN-LAST:event_Bataille_TestActionPerformed
 
     

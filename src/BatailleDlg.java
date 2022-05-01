@@ -240,37 +240,27 @@ public class BatailleDlg extends javax.swing.JDialog {
                 pa.getPerso(0).setImgBouton(Carte2);
                 this.ok=true; //booléen à true car la bataille a bien eu lieu
                 
-                
                 int res = this.b.execute();//appel de la méthode execute de Bataille
 
                 if(res==0){
                     infosCarte1.append("\nEgalité");//égalité
                     infosCarte2.append("\nEgalité");
+                    Vainqueur.setText("Egalité"); //Si le résultat est égal à 0, c'est qu'il y a eu égalité
                 }
                 else if(res==1){
                    infosCarte1.append("\n"+j.getPseudo()+" gagne.");//Le joueur courant gagne
                    infosCarte2.append("\n"+adversaire.getPseudo()+" perd.");
+                   Vainqueur.setText(j.getPseudo()); //Si le résultat est égal à 1, c'est le joueur courant qui a gagné
                 }
                 else if(res==2){
                     infosCarte1.append("\n"+j.getPseudo()+" perd.");//L'adversaire gagne
                     infosCarte2.append("\n"+adversaire.getPseudo()+" gagne.");
+                    Vainqueur.setText(this.adversaire.getPseudo()); //Si le résultat est égal à 2, c'est l'adversaire qui a gagné
                 }
                 
                 //Affichage des informations des paquets des joueurs dans les zones correspondantes
                 infosCarte1.append("\n\n"+pj.toString());
                 infosCarte2.append("\n\n"+pa.toString());
-                
-                if(res==0)
-                {
-                    Vainqueur.setText("Egalité"); //Si le résultat est égal à 0, c'est qu'il y a eu égalité
-                }
-                else if(res==1){
-                    Vainqueur.setText(j.getPseudo()); //Si le résultat est égal à 1, c'est le joueur courant qui a gagné
-                }
-                else if(res==2)
-                {
-                    Vainqueur.setText(this.adversaire.getPseudo()); //Si le résultat est égal à 2, c'est l'adversaire qui a gagné
-                }
                
                 //Si l'un des deux joueurs a un paquet vide, la bataille est terminée et le joueur ayant encore des cartes a gagné
                 if(pj.getTaille()==0)
